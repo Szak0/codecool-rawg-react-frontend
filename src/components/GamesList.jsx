@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { GamesContext } from "./contexts/GamesContext";
 
 const GamesList = () => {
-  const [games] = useContext(GamesContext);
+  const [games, filters, setFilters] = useContext(GamesContext);
 
   return (
     <div>
@@ -13,9 +13,11 @@ const GamesList = () => {
           </div>
           <span key={game.id}>{game.author}</span>
           <span>{game.rating}</span>
-          <div></div>
         </div>
       ))}
+      <div>
+        <button onClick={() => setFilters(filters.page + 1)}>NEXT</button>
+      </div>
     </div>
   );
 };
