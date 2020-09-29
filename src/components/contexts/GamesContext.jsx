@@ -1,9 +1,9 @@
 import React, { useEffect, useState, createContext } from "react";
 import axios from "axios";
 
-export const TopNewsContext = createContext();
+export const GamesContext = createContext();
 
-export const TopNewsProvider = (props) => {
+export const GamesProvider = (props) => {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
@@ -16,8 +16,8 @@ export const TopNewsProvider = (props) => {
   }, []);
 
   return (
-    <TopNewsContext.Provider value={[games, setGames]}>
+    <GamesContext.Provider value={[games, setGames]}>
       {props.children}
-    </TopNewsContext.Provider>
+    </GamesContext.Provider>
   );
 };
