@@ -5,6 +5,7 @@ import GamesList from "./components/GamesList";
 import Filters from "./components/Filters";
 import SearchBar from "./components/SearchBar";
 import DateFilter from "./components/DateFilter";
+import Pagination from "./components/Pagination";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Filters />
         <DateFilter />
         <GamesList />
+        <Pagination />
       </div>
     </GamesProvider>
   );
