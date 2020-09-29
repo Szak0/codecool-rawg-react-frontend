@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { GamesContext } from "./contexts/GamesContext";
 
 const SearchBar = () => {
-  const [games, filters, setFilters] = useContext(GamesContext);
+  const [data, games, filters, setFilters] = useContext(GamesContext);
   const minSearch = 3;
   const paginate = 1;
 
@@ -16,6 +16,7 @@ const SearchBar = () => {
   };
   return (
     <div>
+      <span>Found {data.count} games</span>
       <form onSubmit={(event) => event.preventDefault()}>
         <input
           type="text"
