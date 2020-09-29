@@ -5,26 +5,32 @@ import queryString from "query-string";
 export const GamesContext = createContext();
 
 export const GamesProvider = (props) => {
+  const [data, setData] = useState([]);
   const [games, setGames] = useState([]);
   const [filters, setFilters] = useState({
     page: 1,
+    search: "",
+    ordering: "",
+    dates: "",
   });
 
   useEffect(() => {
+    console.log(filters);
     const paramString = queryString.stringify(filters);
     console.log(paramString);
     const fetchData = async () => {
       const request = await axios(
         `https://api.rawg.io/api/games?` + paramString
       );
-      console.log(request.data.results);
+      console.log(request.data);
+      setData(request.data);
       setGames(request.data.results);
     };
     fetchData();
   }, [filters]);
 
   return (
-    <GamesContext.Provider value={[games, filters, setFilters]}>
+    <GamesContext.Provider value={[data, games, filters, setFilters]}>
       {props.children}
     </GamesContext.Provider>
   );
