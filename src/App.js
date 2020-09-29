@@ -1,17 +1,15 @@
-import React from 'react';
-import './App.css';
-import { TopNewsProvider } from './components/contexts/TopNewsContext'
-import TopNewsList from './components/TopNewsList';
+import React from "react";
+import "./App.css";
+import { GamesProvider } from "./components/contexts/GamesContext";
+import GamesList from "./components/GamesList";
 
 function App() {
   return (
-
-    <TopNewsProvider>
+    <GamesProvider>
       <div className="App">
-        <TopNewsList />
+        <GamesList />
       </div>
-    </TopNewsProvider>
-
+    </GamesProvider>
   );
 }
 
