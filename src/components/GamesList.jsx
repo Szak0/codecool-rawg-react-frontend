@@ -1,22 +1,34 @@
 import React, { useContext } from "react";
 import { GamesContext } from "./contexts/GamesContext";
+import GameItem from "./GameItem";
 
 const GamesList = () => {
-  const [games, filters, setFilters] = useContext(GamesContext);
-
+  const [data, games, filters, setFilters] = useContext(GamesContext);
+  const paginate = 1;
   return (
     <div>
-      {games.map((game, i) => (
-        <div>
-          <div>
-            <h1>{game.name}</h1>
-          </div>
-          <span key={game.id}>{game.author}</span>
-          <span>{game.rating}</span>
-        </div>
+      {games.map((game) => (
+        <GameItem key={game.id} game={game} />
       ))}
       <div>
-        <button onClick={() => setFilters(filters.page + 1)}>NEXT</button>
+        <button
+          onClick={() =>
+            setFilters(
+              filters.page > 1
+                ? { ...filters, page: filters.page - paginate }
+                : { ...filters, page: filters.page }
+            )
+          }
+        >
+          PREV
+        </button>
+        <button
+          onClick={() =>
+            setFilters({ ...filters, page: filters.page + paginate })
+          }
+        >
+          NEXT
+        </button>
       </div>
     </div>
   );
