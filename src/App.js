@@ -1,11 +1,17 @@
 import React from 'react';
 import './App.css';
+import { TopNewsProvider } from './components/contexts/TopNewsContext'
+import TopNewsList from './components/TopNewsList';
 
 function App() {
   return (
-    <div className="App">
 
-    </div>
+    <TopNewsProvider>
+      <div className="App">
+        <TopNewsList />
+      </div>
+    </TopNewsProvider>
+
   );
 }
 
