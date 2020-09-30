@@ -21,9 +21,10 @@ const DateFilter = () => {
   };
 
   const handleEndDateFilter = (event) => {
-    console.log(event.target.value);
     let dates = `${dateFrom},${event.target.value}`;
-    console.log(dates);
+    if (dates[0] === ",") {
+      dates = "";
+    }
     setFilters({
       ...filters,
       page: 1,
