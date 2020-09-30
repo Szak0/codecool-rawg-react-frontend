@@ -7,7 +7,7 @@ import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    display: "block",
+    display: "flex",
     marginTop: theme.spacing(2),
   },
   formControl: {
