@@ -9,6 +9,7 @@ import Pagination from "./components/Pagination";
 import Header from "./Header";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import GameDetails from "./components/GameDetails";
 
 function App() {
   return (
@@ -18,19 +19,25 @@ function App() {
           <CssBaseline />
           <Header />
           <div className="App">
-            <SearchBar />
-            <Filters />
-            <DateFilter />
+            
             <Switch>
-              <Route path={"/"} exact={true} component={GamesList}>
+              <Route path={"/"} exact component={GamesList}>
+                <SearchBar />
+              <Filters />
+              <DateFilter />
                 <GamesList />
+                <Pagination />
+
               </Route>
-              <Route path="/game/:id">
-                <GamesList />
-              </Route>
+              <Route
+              exact
+              path="/game/:id">
+              
+                <GameDetails />
+                </Route>
+                
             </Switch>
 
-            <Pagination />
           </div>
         </GamesProvider>
       </BrowserRouter>
