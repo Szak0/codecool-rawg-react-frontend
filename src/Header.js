@@ -21,6 +21,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import SearchBar from "./components/SearchBar";
 
 const drawerWidth = 200;
 
@@ -185,14 +186,7 @@ export default function PersistentDrawerLeft() {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
+            <SearchBar />
           </div>
           <div style={{ marginLeft: "auto" }}>
             <IconButton aria-label="show 17 new notifications" color="inherit">
