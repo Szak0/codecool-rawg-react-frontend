@@ -12,6 +12,7 @@ export const GamesProvider = (props) => {
     search: "",
     ordering: "",
     dates: "",
+    page_size: 18,
   });
 
   useEffect(() => {
