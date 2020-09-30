@@ -179,7 +179,7 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Raw G
+            RawG
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -225,8 +225,8 @@ export default function PersistentDrawerLeft() {
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
-              <ChevronRightIcon />
-            )}
+                <ChevronRightIcon />
+              )}
           </IconButton>
         </div>
         <Divider />
