@@ -3,7 +3,6 @@ import "./App.css";
 import { GamesProvider } from "./components/contexts/GamesContext";
 import GamesList from "./components/GamesList";
 import Filters from "./components/Filters";
-import SearchBar from "./components/SearchBar";
 import DateFilter from "./components/DateFilter";
 import Pagination from "./components/Pagination";
 import Header from "./Header";
@@ -18,19 +17,18 @@ function App() {
           <CssBaseline />
           <Header />
           <div className="App">
-            <SearchBar />
-            <Filters />
-            <DateFilter />
             <Switch>
               <Route path={"/"} exact={true} component={GamesList}>
+                <Filters />
+                <DateFilter />
                 <GamesList />
+                <Pagination />
               </Route>
               <Route path="/game/:id">
-                <GamesList />
+
               </Route>
             </Switch>
 
-            <Pagination />
           </div>
         </GamesProvider>
       </BrowserRouter>
