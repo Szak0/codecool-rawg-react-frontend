@@ -40,7 +40,7 @@ const LeftSideDrawer = ({
             </div>
             <Divider />
             <List>
-                <Link to="/all-time-top">
+                <Link to="/all-time-top" className="normalize-link">
                     <ListItem button>
                         <ListItemIcon>
                             <AllTimeTop />
@@ -48,7 +48,7 @@ const LeftSideDrawer = ({
                         <ListItemText primary={"All time top"} />
                     </ListItem>
                 </Link>
-                <Link to="/best-of-the-year">
+                <Link to="/best-of-the-year" className="normalize-link">
                     <ListItem button>
                         <ListItemIcon>
                             <BestOfTheYearLogo />
@@ -56,7 +56,7 @@ const LeftSideDrawer = ({
                         <ListItemText primary={"Best of the year"} />
                     </ListItem>
                 </Link>
-                <Link to="/popular-in-2019">
+                <Link to="/popular-in-2019" className="normalize-link">
                     <ListItem button>
                         <ListItemIcon>
                             <PopularLogo />

@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchBar = () => {
   const classes = useStyles();
-  const theme = useTheme();
   const [data, games, filters, setFilters] = useContext(GamesContext);
   const minSearch = 3;
   const paginate = 1;
