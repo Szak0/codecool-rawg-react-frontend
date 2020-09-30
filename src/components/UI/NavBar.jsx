@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from 'react'
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
 import AppBar from "@material-ui/core/AppBar";
@@ -11,6 +11,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import SearchBar from "../SearchBar"
 import SearchIcon from "@material-ui/icons/Search";
 import { Navbar } from "react-bootstrap";
+import { GamesContext } from "../contexts/GamesContext"
 
 const NavBar = ({
     open,
@@ -18,6 +19,11 @@ const NavBar = ({
     handleDrawerOpen,
     handleProfileMenuOpen,
 }) => {
+    const [data, games, filters, setFilters] = useContext(GamesContext);
+    const handleMainRoute = () => {
+        setFilters({
+        });
+    };
     const menuId = "primary-search-account-menu";
     return (
         <AppBar
@@ -39,7 +45,7 @@ const NavBar = ({
                 </IconButton>
 
                 <Typography className={classes.title} variant="h6" noWrap>
-                    <Link to="/">
+                    <Link to="/" onClick={handleMainRoute}>
                         <Navbar.Brand>RawG</Navbar.Brand>
                     </Link>
                 </Typography>

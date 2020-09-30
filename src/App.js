@@ -13,6 +13,7 @@ import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
 import NavBar from "./components/UI/NavBar"
 import Box from "@material-ui/core/Box";
 import LeftSideDrawer from "./components/UI/LeftSideDrawer";
+import DrawerContent from "./components/sideContent/DrawerContent"
 
 const drawerWidth = 200;
 
@@ -170,6 +171,15 @@ function App() {
                   </Route>
                   <Route exact path="/game/:id">
                     <GameDetails />
+                  </Route>
+                  <Route exact path="/all-time-top">
+                    <GamesList />
+                  </Route>
+                  <Route exact path="/best-of-the-year">
+                    <GamesList />
+                  </Route>
+                  <Route exact path="/popular-in-2019">
+                    <GamesList />
                   </Route>
                 </Switch>
               </Box>
