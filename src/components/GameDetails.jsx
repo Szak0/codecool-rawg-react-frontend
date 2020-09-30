@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { GamesContext } from "./contexts/GamesContext";
-import GameItem from "./GameItem";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 
@@ -12,18 +10,20 @@ const GameDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       const request = await axios(
-        `https://api.rawg.io/api/games/3328`
+        `https://api.rawg.io/api/games/${id}`
       );
 
       setGame(request.data);
     };
     fetchData();
-  }, []);
+  });
 
   return (
-    <div>
-      <p>{game.name}</p>
-
+    <div >
+      <h1>{game.name}</h1>
+      <img src={game.background_image} alt="" style={{ width: "20vw" }} />
+      <p>{game.released}</p>
+      <p>{game.description_raw}</p>
     </div>
   );
 };
