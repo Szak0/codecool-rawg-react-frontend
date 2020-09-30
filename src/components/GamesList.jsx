@@ -6,9 +6,12 @@ const GamesList = () => {
   const [data, games, filters, setFilters] = useContext(GamesContext);
   return (
     <div>
-      {games.map((game) => (
-        <GameItem key={game.id} game={game} />
-      ))}
+      <h1>{data.seo_title}</h1>
+      <section className="games-container">
+        {games.map((game) => (
+          <GameItem key={game.id} game={game} />
+        ))}
+      </section>
     </div>
   );
 };
