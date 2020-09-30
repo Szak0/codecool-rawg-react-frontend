@@ -12,8 +12,15 @@
   margin: auto;
   height: 100%;
   width: 90vw;
+  margin-top: 3rem;
 }
-
+.side-logo-svg{
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  border-radius: 6px;
+}
 body {
   font-size: 14px;
   line-height: normal;
@@ -28,14 +35,17 @@ body {
 .games-container {
   display: flex;
   flex-flow: row wrap;
-  justify-content: end;
+  justify-content: center;
   padding: 0;
-  margin: 0;
   list-style: none;
   flex-direction: row;
+  width: 100%;
+  
 }
 
 .game-card {
-  width: 25vw;
-  height: 25vh;
+  width: 14rem;
+  height: 15rem;
+  margin: auto;
+
 }
