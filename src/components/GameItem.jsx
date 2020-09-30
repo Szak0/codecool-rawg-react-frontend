@@ -2,12 +2,15 @@ import React from "react";
 
 const GameItem = ({ game }) => {
   return (
-    <div key={game.name + game.id}>
+    <div key={game.name + game.id} className="game-card">
       <div>
-        <h1>{game.name}</h1>
+        <h3>{game.name}</h3>
       </div>
-      <span>{game.author}</span>
-      <span>{game.rating}</span>
+      <span>{game.released}</span>
+      <div>
+        <span>{game.author}</span>
+        <span>{game.rating}</span>
+      </div>
     </div>
   );
 };
