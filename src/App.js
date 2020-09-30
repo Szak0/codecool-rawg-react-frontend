@@ -8,6 +8,7 @@ import Pagination from "./components/Pagination";
 import Header from "./Header";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import GameDetails from "./components/GameDetails";
 
 function App() {
   return (
@@ -24,11 +25,10 @@ function App() {
                 <GamesList />
                 <Pagination />
               </Route>
-              <Route path="/game/:id">
-
-              </Route>
+              <Route exact path="/game/:id">
+                <GameDetails />
+                </Route>
             </Switch>
-
           </div>
         </GamesProvider>
       </BrowserRouter>
