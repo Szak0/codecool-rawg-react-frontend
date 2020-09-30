@@ -6,8 +6,9 @@
     Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
 }
 
-.App {
+.app_ {
   background-color: blue;
+  display: flex;
   margin: auto;
   height: 100%;
   width: 90vw;

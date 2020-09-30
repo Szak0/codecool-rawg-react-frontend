@@ -31,7 +31,6 @@ const DateFilter = () => {
       dates: dates,
     });
   };
-  console.log(dateFrom);
   return (
     <div className={classes.container}>
       <form noValidate>
