@@ -6,7 +6,7 @@ import axios from "axios";
 
 const GameDetails = () => {
 
-    const [game, setGame] = useState([])
+  const [game, setGame] = useState([])
   let id = window.location.href.split('/').reverse()[0];
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const GameDetails = () => {
       const request = await axios(
         `https://api.rawg.io/api/games/3328`
       );
-      
+
       setGame(request.data);
     };
     fetchData();
@@ -23,7 +23,6 @@ const GameDetails = () => {
   return (
     <div>
       <p>{game.name}</p>
-      
 
     </div>
   );
