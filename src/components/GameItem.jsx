@@ -1,5 +1,7 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
+import { Link } from "react-router-dom";
+import Platforms from "./Platforms";
 
 const GameItem = ({ game }) => {
   return (
@@ -11,23 +13,26 @@ const GameItem = ({ game }) => {
           <img src={game.background_image} alt={game.name} />
         )}
       </div>
-      <div className={"game-card-info"}>
-        <div>
-          <h3>{game.name}</h3>
+      <Link to={"game/" + game.id} className={"normalize-link"}>
+        <div className={"game-card-info"}>
+          <div>
+            <h3>{game.name}</h3>
+          </div>
+          <span>{game.released}</span> <Platforms platforms={game.platforms} />
+          <div className={"rating-info"}>
+            <span>{game.author}</span>
+            <StarRatings
+              rating={game.rating}
+              starRatedColor="black"
+              numberOfStars={5}
+              name="game-rating"
+              starDimension="26px"
+            />
+
+            <span className={"rating-number"}>{game.rating}</span>
+          </div>
         </div>
-        <span>{game.released}</span>
-        <div className={"rating-info"}>
-          <span>{game.author}</span>
-          <StarRatings
-            rating={game.rating}
-            starRatedColor="black"
-            numberOfStars={5}
-            name="game-rating"
-            starDimension="26px"
-          />
-          <span className={"rating-number"}>{game.rating}</span>
-        </div>
-      </div>
+      </Link>
     </div>
   );
 };

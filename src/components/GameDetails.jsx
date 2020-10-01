@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Platforms from './Platforms'
-
-
+import Platforms from "./Platforms";
 
 const GameDetails = () => {
 
@@ -11,17 +9,12 @@ const GameDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const request = await axios(
-        `https://api.rawg.io/api/games/${id}`
-      );
-      
+      const request = await axios(`https://api.rawg.io/api/games/${id}`);
+
       setGame(request.data);
     };
     fetchData();
   });
-
-
-  
 
   return (
     <div >
