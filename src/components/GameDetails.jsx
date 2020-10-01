@@ -23,9 +23,7 @@ const GameDetails = () => {
       <img src={game.background_image} alt="" style={{ width: "20vw" }} />
       <p>{game.released}</p>
       <p>{game.description_raw}</p>
-      <p>
-        <Platforms platforms={platforms} />
-      </p>
+      <Platforms platforms={platforms} />
     </div>
   );
 };

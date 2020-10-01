@@ -16,14 +16,11 @@ export const GamesProvider = (props) => {
   });
 
   useEffect(() => {
-    console.log(filters);
     const paramString = queryString.stringify(filters);
-    console.log(paramString);
     const fetchData = async () => {
       const request = await axios(
         `https://api.rawg.io/api/games?` + paramString
       );
-      console.log(request.data);
       setData(request.data);
       setGames(request.data.results);
     };
