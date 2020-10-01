@@ -39,7 +39,7 @@ const NavBar = ({ open, classes, handleDrawerOpen, handleProfileMenuOpen }) => {
         </IconButton>
 
         <Typography className={classes.title} variant="h6" noWrap>
-          <Link to="/" onClick={handleMainRoute}>
+          <Link to="/" onClick={handleMainRoute} className={"normalize-link"}>
             <Navbar.Brand>RawG</Navbar.Brand>
           </Link>
         </Typography>
