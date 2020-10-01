@@ -30,7 +30,13 @@ const GameItem = ({ game }) => {
             />
           </div>
         ) : (
-          <img src={game.background_image} alt={game.name} />
+          <div>
+            {game.background_image ? (
+              <img src={game.background_image} alt={game.name} />
+            ) : (
+              <div style={{ width: "400px", height: "500px" }}>No image</div>
+            )}
+          </div>
         )}
       </div>
 

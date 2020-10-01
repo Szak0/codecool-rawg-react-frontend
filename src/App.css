@@ -35,6 +35,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 .game-list-container {
+  display: flex;
   justify-content: center;
 }
 .games-container {
@@ -106,7 +107,12 @@ img {
   margin-left: auto;
   margin-right: auto;
   background-color: transparent;
-  border-color: transparent;
+  border-style: solid;
+  border-color: green;
+  border-top-left-radius: 25px;
+  color: green;
+  font-size: 20px;
+  padding-left: 10px;
 }
 
 video {
@@ -136,7 +142,6 @@ video {
   padding-left: 10px;
   padding-right: 10px;
   text-transform: uppercase;
-  
 }
 
 .detailCard {
@@ -163,12 +168,11 @@ video {
 .release {
   float: left;
   margin-left: 2vw;
-  
-} 
+}
 .platforms {
   float: left;
   margin-left: 2vw;
-} 
+}
 
 .tagsInDetails {
   overflow: hidden;
@@ -180,7 +184,7 @@ video {
 .oneTag {
   float: left;
   margin-left: 1vw;
-} 
+}
 .tagsInGenres {
   overflow: hidden;
   margin-left: 2vw;
@@ -189,5 +193,44 @@ video {
 .oneGenre {
   float: left;
   margin-right: 1vw;
-} 
-
+}
+.loading-ring {
+  display: flex;
+  justify-content: center;
+  margin-top: 10rem;
+}
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
