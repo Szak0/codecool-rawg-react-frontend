@@ -32,7 +32,7 @@ const DateFilter = () => {
     });
   };
   return (
-    <div className={classes.container}>
+    <div className={"date-form-filter"}>
       <form noValidate>
         <TextField
           id="date"
