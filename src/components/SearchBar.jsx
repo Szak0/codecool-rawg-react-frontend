@@ -16,8 +16,7 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
-}))
-
+}));
 
 const SearchBar = () => {
   const classes = useStyles();
@@ -35,14 +34,15 @@ const SearchBar = () => {
   };
   return (
     <div>
-      <InputBase onSubmit={(event) => event.preventDefault()}
+      <InputBase
+        onSubmit={(event) => event.preventDefault()}
         placeholder={"Found " + data.count + " games"}
         type="text"
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,
         }}
-        name={{ search: filters.search }}
+        name={filters.search}
         onChange={handleSearch}
       />
     </div>

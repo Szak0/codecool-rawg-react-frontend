@@ -40,7 +40,6 @@ const GameDetails = () => {
           <div className="detailCard"><p>{game.description_raw}</p></div>
           <div className="tagsInDetails"> {tags.map((tag, index) => (<p key={index} className="oneTag"> #{tag.name}  </p>))}</div>
           </div>
-
   );
 };
 
