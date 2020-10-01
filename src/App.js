@@ -10,10 +10,12 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GameDetails from "./components/GameDetails";
 import clsx from "clsx";
 import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
-import NavBar from "./components/UI/NavBar"
+import NavBar from "./components/UI/NavBar";
 import Box from "@material-ui/core/Box";
 import LeftSideDrawer from "./components/UI/LeftSideDrawer";
-
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import Paper from "@material-ui/core/Paper";
 const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
@@ -88,7 +90,6 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
   },
   drawer: {
-    width: drawerWidth,
     flexShrink: 0,
   },
   drawerPaper: {
@@ -107,9 +108,8 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-
     }),
-
+    marginLeft: 0,
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -117,10 +117,13 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: +drawerWidth,
-    marginRight: -drawerWidth,
   },
 }));
-
+const darkTheme = createMuiTheme({
+  palette: {
+    type: "dark",
+  },
+});
 
 function App() {
   const classes = useStyles();
@@ -153,30 +156,55 @@ function App() {
   return (
     <React.Fragment>
       <BrowserRouter>
-        <div className="app_">
-          <GamesProvider>
-            <CssBaseline />
-            <NavBar classes={classes} handleDrawerOpen={handleDrawerOpen} handleProfileMenuOpen={handleProfileMenuOpen} open={open} />
-            <main className={clsx(classes.content, {
-              [classes.contentShift]: open,
-            })}>
-              <Box my={2}>
-                <Switch>
-                  <Route path={"/"} exact={true}>
-                    <Filters />
-                    <DateFilter />
-                    <GamesList />
-                    <Pagination />
-                  </Route>
-                  <Route exact path="/game/:id">
-                    <GameDetails />
-                  </Route>
-                </Switch>
-              </Box>
-            </main>
-            <LeftSideDrawer classes={classes} handleDrawerClose={handleDrawerClose} theme={theme} open={open} />
-          </GamesProvider>
-        </div>
+        <ThemeProvider theme={darkTheme}>
+          <Paper>
+            <div className="app_">
+              <GamesProvider>
+                <CssBaseline />
+                <NavBar
+                  classes={classes}
+                  handleDrawerOpen={handleDrawerOpen}
+                  handleProfileMenuOpen={handleProfileMenuOpen}
+                  open={open}
+                />
+                <main
+                  className={clsx(classes.content, {
+                    [classes.contentShift]: open,
+                  })}
+                >
+                  <Box my={1}>
+                    <Switch>
+                      <Route path={"/"} exact={true}>
+                        <Filters />
+                        <DateFilter />
+                        <GamesList />
+                        <Pagination />
+                      </Route>
+                      <Route exact path="/game/:id">
+                        <GameDetails />
+                      </Route>
+                      <Route exact path="/all-time-top">
+                        <GamesList />
+                      </Route>
+                      <Route exact path="/best-of-the-year">
+                        <GamesList />
+                      </Route>
+                      <Route exact path="/popular-in-2019">
+                        <GamesList />
+                      </Route>
+                    </Switch>
+                  </Box>
+                </main>
+                <LeftSideDrawer
+                  classes={classes}
+                  handleDrawerClose={handleDrawerClose}
+                  theme={theme}
+                  open={open}
+                />
+              </GamesProvider>
+            </div>
+          </Paper>
+        </ThemeProvider>
       </BrowserRouter>
     </React.Fragment>
   );

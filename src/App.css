@@ -7,18 +7,17 @@
 }
 
 .app_ {
-  background-color: blue;
   display: flex;
   margin: auto;
   height: 100%;
-  width: 90vw;
+  width: 100vw;
   margin-top: 3rem;
 }
 .normalize-link {
   text-decoration: none;
-  color: black;
+  color: rgb(255, 255, 255);
 }
-.side-logo-svg{
+.side-logo-svg {
   width: 32px;
   min-width: 32px;
   height: 32px;
@@ -35,21 +34,56 @@ body {
   color: #fff;
   text-rendering: optimizeLegibility;
 }
-
-.games-container {
-  display: flex;
-  flex-flow: row wrap;
+.game-list-container {
   justify-content: center;
-  padding: 0;
-  list-style: none;
-  flex-direction: row;
+}
+.games-container {
   width: 100%;
-  
+  display: grid;
+  grid-gap: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  grid-template-columns: repeat(auto-fill, 300px);
 }
 
 .game-card {
-  width: 14rem;
-  height: 15rem;
-  margin: auto;
+  max-width: 100%;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: black;
+  margin: 1rem;
+}
 
+.video-container {
+  max-width: 100%;
+}
+.search-form-controll {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.date-form-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.game-card-info {
+  padding-left: 5px;
+}
+
+.rating-info {
+  display: flex;
+}
+.rating-number {
+  font-size: 24px;
+  float: right;
+  color: rgb(255, 255, 255);
+}
+img {
+  width: 100%;
+  height: auto;
+}
+video {
+  width: 100%;
+  height: auto;
 }

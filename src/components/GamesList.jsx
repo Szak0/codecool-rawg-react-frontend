@@ -5,7 +5,7 @@ import GameItem from "./GameItem";
 const GamesList = () => {
   const [data, games, filters, setFilters] = useContext(GamesContext);
   return (
-    <div>
+    <div className={"game-list-container"}>
       <h1>{data.seo_title}</h1>
       <section className="games-container">
         {games.map((game) => (

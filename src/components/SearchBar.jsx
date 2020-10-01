@@ -35,7 +35,6 @@ const SearchBar = () => {
   };
   return (
     <div>
-
       <InputBase onSubmit={(event) => event.preventDefault()}
         placeholder={"Found " + data.count + " games"}
         type="text"
@@ -46,7 +45,6 @@ const SearchBar = () => {
         name={{ search: filters.search }}
         onChange={handleSearch}
       />
-
     </div>
   );
 };

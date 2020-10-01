@@ -8,11 +8,13 @@ import Select from "@material-ui/core/Select";
 const useStyles = makeStyles((theme) => ({
   button: {
     display: "flex",
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(5),
+    float: "right"
   },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 200,
+
   },
 }));
 
@@ -29,7 +31,7 @@ const Filters = () => {
   };
 
   return (
-    <div>
+    <div className={"search-form-controll"}>
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="order-native-simple">Order by</InputLabel>
         <Select
