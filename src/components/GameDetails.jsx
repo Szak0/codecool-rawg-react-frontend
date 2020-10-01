@@ -7,7 +7,6 @@ import Platforms from './Platforms'
 const GameDetails = () => {
 
     const [game, setGame] = useState([]);
-    const [platforms, setPlatforms] = useState([])
   let id = window.location.href.split('/').reverse()[0];
 
   useEffect(() => {
@@ -17,7 +16,6 @@ const GameDetails = () => {
       );
       
       setGame(request.data);
-      setPlatforms(request.data.platforms);
     };
     fetchData();
   });
@@ -31,7 +29,7 @@ const GameDetails = () => {
         <img src={game.background_image} alt="" style={{width: "20vw"}}/>
         <p>{game.released}</p> 
       <p>{game.description_raw}</p>    
-      <p><Platforms platforms={platforms}/></p>  
+      <p><Platforms platforms={game.platforms}/></p>  
     </div>
   );
 };
