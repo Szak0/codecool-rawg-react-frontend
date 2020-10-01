@@ -18,9 +18,9 @@ const Platforms = props => {
                 platformPics.push(ps) ;
             }else if (text.startsWith("Xbox")){
                 platformPics.push(xbox);
-            }  else if (text.startsWith("mac") || text.startsWith("iOS")){
+            }  else if (text.startsWith("mac")){
                 platformPics.push(mac);
-            } else if (text.startsWith("mac") || text.startsWith("iOS")){
+            } else if (text.startsWith("Linux")){
                 platformPics.push(linux);
             }
         })
