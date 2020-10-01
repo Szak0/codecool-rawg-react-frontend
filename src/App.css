@@ -101,6 +101,11 @@ video {
   position: relative;
   text-align: center;
   color: white;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  max-width: 100%;
+  max-height: 500px;
+  overflow: hidden;
 }
 
 .gameDetailsTitleCentered {
@@ -112,6 +117,7 @@ video {
   padding-left: 10px;
   padding-right: 10px;
   text-transform: uppercase;
+  
 }
 
 .detailCard {
@@ -137,8 +143,32 @@ video {
 
 .release {
   float: left;
+  margin-left: 2vw;
+  
 } 
 .platforms {
-  float: right;
-
+  float: left;
+  margin-left: 2vw;
 } 
+
+.tagsInDetails {
+  overflow: hidden;
+  text-align: center;
+  margin-left: 2vw;
+  margin-right: 9vw;
+}
+
+.oneTag {
+  float: left;
+  margin-left: 1vw;
+} 
+.tagsInGenres {
+  overflow: hidden;
+  margin-left: 2vw;
+}
+
+.oneGenre {
+  float: left;
+  margin-right: 1vw;
+} 
+
