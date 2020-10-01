@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Platforms from "./Platforms";
+import { BorderTop } from "@material-ui/icons";
 
 const GameDetails = () => {
 
@@ -18,11 +19,19 @@ const GameDetails = () => {
 
   return (
     <div >
-        <h1>{game.name}</h1>
-        <img src={game.background_image} alt="" style={{width: "20vw"}}/>
-        <p>{game.released}</p> 
-      <p>{game.description_raw}</p>    
-      <p><Platforms platforms={game.platforms}/></p>  
+          <div className="gameDetailsTitle">
+            
+            <img src={game.background_image} alt="" style={{width: "55%", borderRadius: "3px"}} />
+            <h1 className="gameDetailsTitleCentered">{game.name}</h1>
+          </div>
+          <div className="relesaseAndPlatforms">
+            <p className="release">Release date: {game.released}</p> 
+            <p className="platforms"><Platforms platforms={game.platforms}/></p>
+          </div>
+          <div className="detailCard"><p>{game.description_raw}</p></div>
+          
+          
+          
     </div>
   );
 };

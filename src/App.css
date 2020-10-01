@@ -96,3 +96,49 @@ video {
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
 }
+
+.gameDetailsTitle {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.gameDetailsTitleCentered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  padding-left: 10px;
+  padding-right: 10px;
+  text-transform: uppercase;
+}
+
+.detailCard {
+  max-width: 100%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 10px;
+  padding: 10px;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  margin: 1rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.relesaseAndPlatforms {
+  overflow: hidden;
+  margin-left: 3vw;
+  max-width: 30%;
+  margin-top: 10px;
+}
+
+.release {
+  float: left;
+} 
+.platforms {
+  float: right;
+
+} 
