@@ -36,7 +36,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601536182091</updated>
-      <workItem from="1601536202178" duration="356000" />
+      <workItem from="1601536202178" duration="602000" />
     </task>
     <servers />
   </component>
@@ -56,6 +56,14 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="178" y="23" width="950" height="777" key="CommitChangelistDialog2/0.23.1280.777@0.23.1280.777" timestamp="1601536699513" />
+    <state x="115" y="90" key="MergeDialog" timestamp="1601537074805">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="115" y="90" key="MergeDialog/0.23.1280.777@0.23.1280.777" timestamp="1601537074805" />
+    <state x="338" y="134" key="MultipleFileMergeDialog" timestamp="1601537074836">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="338" y="134" key="MultipleFileMergeDialog/0.23.1280.777@0.23.1280.777" timestamp="1601537074836" />
     <state x="227" y="151" key="Vcs.Push.Dialog.v2" timestamp="1601536457170">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -64,5 +72,9 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="345" y="335" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1280.777@0.23.1280.777" timestamp="1601536691543" />
+    <state x="274" y="210" key="git4idea.merge.GitPullDialog" timestamp="1601536988561">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="274" y="210" key="git4idea.merge.GitPullDialog/0.23.1280.777@0.23.1280.777" timestamp="1601536988561" />
   </component>
 </project>
