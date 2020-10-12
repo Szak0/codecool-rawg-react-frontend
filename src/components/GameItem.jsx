@@ -13,7 +13,7 @@ const GameItem = ({ game }) => {
   };
 
   return (
-    <div key={game.name + game.id} className="game-card">
+    <div className="game-card">
       <div className="video-container">
         {game.clip ? (
           <div>
@@ -25,7 +25,9 @@ const GameItem = ({ game }) => {
               poster={game.background_image}
               onClick={(e) => e.target.pause()}
               ref={videInfo.vidRef}
+              controlsList="nodownload"
               muted
+              loop
               type="video/mp4"
             />
           </div>
@@ -41,7 +43,7 @@ const GameItem = ({ game }) => {
       </div>
 
       <Link to={"game/" + game.id} className={"normalize-link"}>
-        <div className={"game-card-info"}>
+        <div className={"game-card-info"} key={game.rating + game.name}>
           <div>
             <h3>{game.name}</h3>
           </div>
