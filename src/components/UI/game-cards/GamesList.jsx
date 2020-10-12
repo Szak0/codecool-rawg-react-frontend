@@ -3,9 +3,9 @@ import React, {
   useRef,
   useCallback,
 } from "react";
-import { GamesContext } from "./contexts/GamesContext";
-import GameItem from "./GameItem";
-import LoadingRing from "./UI/LoadingRing";
+import { GamesContext } from "../../../components/contexts/GamesContext";
+import GameItem from "../../game-cards/GamesList";
+import LoadingRing from "../../UI/loading-ring/LoadingRing";
 
 const GamesList = () => {
   const [

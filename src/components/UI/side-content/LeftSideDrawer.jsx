@@ -4,7 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Drawer from "@material-ui/core/Drawer";
-import DrawerContent from "../sideContent/DrawerContent";
+import DrawerContent from "../../UI/side-content/DrawerContent";
 
 const LeftSideDrawer = ({ open, classes, handleDrawerClose, theme }) => {
   return (

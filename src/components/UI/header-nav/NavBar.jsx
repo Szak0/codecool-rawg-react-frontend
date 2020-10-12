@@ -8,15 +8,16 @@ import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import SearchBar from "../SearchBar";
 import SearchIcon from "@material-ui/icons/Search";
 import { Navbar } from "react-bootstrap";
-import { GamesContext } from "../contexts/GamesContext";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+
+import SearchBar from "../filters/search-bar/SearchBar";
+import { GamesContext } from "../../contexts/GamesContext";
 
 const NavBar = ({
   open,

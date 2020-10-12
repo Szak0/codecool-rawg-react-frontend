@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { GamesContext } from "./contexts/GamesContext";
+import { GamesContext } from "../../../contexts/GamesContext";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";

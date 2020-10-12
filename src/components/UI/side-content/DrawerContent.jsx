@@ -3,15 +3,16 @@ import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import AllTimeTop from "../UI/AllTimeTopLogo";
-import PopularLogo from "../UI/PopularLogo";
-import BestOfTheYearLogo from "../UI/BestOfTheYearLogo";
+import AllTimeTop from "../logos/AllTimeTopLogo";
+import PopularLogo from "../logos/PopularLogo";
+import ThisWeekLogo from "../logos/ThisWeekLogo";
+import NextWeekLogo from "../logos/NextWeekLogo";
+import BestOfTheYearLogo from "../logos/BestOfTheYearLogo";
 import { Link } from "react-router-dom";
-import { GamesContext } from "../contexts/GamesContext";
+import { GamesContext } from "../../contexts/GamesContext";
 import Divider from "@material-ui/core/Divider";
-import ThisWeekLogo from "../UI/ThisWeekLogo";
-import NextWeekLogo from "../UI/NextWeekLogo";
-import StarLogo from "../UI/StarLogo";
+
+import StarLogo from "../logos/StarLogo";
 
 const DrawerContent = () => {
   const [data, games, filters, setFilters, isLoading, setGames] = useContext(
