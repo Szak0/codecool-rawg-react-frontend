@@ -1,7 +1,6 @@
-import React, { useEffect, useState, createContext, useCallback } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import axios from "axios";
 import queryString from "query-string";
-import { Cancel } from "@material-ui/icons";
 
 export const GamesContext = createContext();
 

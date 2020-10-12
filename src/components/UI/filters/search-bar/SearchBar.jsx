@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { GamesContext } from "./contexts/GamesContext";
+import { GamesContext } from "../../../contexts/GamesContext";
 import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {

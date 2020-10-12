@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Platforms from "./Platforms";
+import Platforms from "../UI/platform-icons/Platforms";
 
 
 
@@ -23,7 +23,7 @@ const GameDetails = () => {
 
     };
     fetchData();
-  }, []);
+  }, [id]);
   console.log(game.tags)
   return (
     <div className="detailContainer">

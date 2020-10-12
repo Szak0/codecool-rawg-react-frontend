@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import { GamesContext } from "./contexts/GamesContext";
+import { GamesContext } from "../../../contexts/GamesContext";
 
 const useStyles = makeStyles((theme) => ({
   textField: {

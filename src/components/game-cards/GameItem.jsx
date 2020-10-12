@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import StarRatings from "react-star-ratings";
 import { Link } from "react-router-dom";
-import Platforms from "./Platforms";
+import Platforms from "../UI/platform-icons/Platforms";
 
 const GameItem = ({ game }) => {
   const [videInfo, seVideoInfo] = useState({

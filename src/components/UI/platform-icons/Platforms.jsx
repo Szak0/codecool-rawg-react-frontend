@@ -1,9 +1,9 @@
 import React from "react";
-import windowsLogo from "../static/windows.svg";
-import linux from "../static/linux.svg";
-import mac from "../static/mac.svg";
-import ps from "../static/ps.svg";
-import xbox from "../static/xbox.svg";
+import windowsLogo from "../../../static/windows.svg";
+import linux from "../../../static/linux.svg";
+import mac from "../../../static/mac.svg";
+import ps from "../../../static/ps.svg";
+import xbox from "../../../static/xbox.svg";
 
 const Platforms = (props) => {
   let platformList = [];
