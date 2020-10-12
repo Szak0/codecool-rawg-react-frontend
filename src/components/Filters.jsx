@@ -9,18 +9,19 @@ const useStyles = makeStyles((theme) => ({
   button: {
     display: "flex",
     marginTop: theme.spacing(5),
-    float: "right"
+    float: "right",
   },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 200,
-
   },
 }));
 
 const Filters = () => {
   const classes = useStyles();
-  const [data, games, filters, setFilters] = useContext(GamesContext);
+  const [data, games, filters, setFilters, isLoading, setGames] = useContext(
+    GamesContext
+  );
 
   const handleChange = (event) => {
     setFilters({
@@ -28,6 +29,7 @@ const Filters = () => {
       page: 1,
       ordering: event.target.value,
     });
+    setGames([]);
   };
 
   return (
