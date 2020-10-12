@@ -1,6 +1,7 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState, createContext, useCallback } from "react";
 import axios from "axios";
 import queryString from "query-string";
+import { Cancel } from "@material-ui/icons";
 
 export const GamesContext = createContext();
 
@@ -8,32 +9,40 @@ export const GamesProvider = (props) => {
   const [data, setData] = useState([]);
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const firstPage = 1;
+  const pageSize = 12;
+
   const [filters, setFilters] = useState({
-    page: 1,
+    page: firstPage,
     search: "",
     ordering: "",
     dates: "",
-    page_size: 18,
+    page_size: pageSize,
   });
 
   useEffect(() => {
-    setIsLoading(true);
     const paramString = queryString.stringify(filters);
+    console.log(paramString);
     const fetchData = async () => {
-      const request = await axios(
-        `https://api.rawg.io/api/games?` + paramString
-      );
-      setData(request.data);
-      console.log(request.data);
-      setGames(request.data.results);
-      setIsLoading(false);
+      setIsError(null);
+      setIsLoading(true);
+      try {
+        const request = await axios({
+          url: `https://api.rawg.io/api/games?` + paramString,
+        });
+        setData(request.data);
+        setGames((game) => [...game, ...request.data.results]);
+        setIsLoading(false);
+      } catch (error) {
+        setIsError(true);
+      }
     };
     fetchData();
   }, [filters]);
-
   return (
     <GamesContext.Provider
-      value={[data, games, filters, setFilters, isLoading]}
+      value={[data, games, filters, setFilters, isLoading, setGames, isError]}
     >
       {props.children}
     </GamesContext.Provider>

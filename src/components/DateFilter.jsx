@@ -13,11 +13,14 @@ const useStyles = makeStyles((theme) => ({
 
 const DateFilter = () => {
   const [dateFrom, setDateFrom] = useState("");
-  const [data, games, filters, setFilters] = useContext(GamesContext);
+  const [data, games, filters, setFilters, isLoading, setGames] = useContext(
+    GamesContext
+  );
   const classes = useStyles();
 
   const handleStartDateFilter = (event) => {
     setDateFrom(event.target.value);
+    setGames([]);
   };
 
   const handleEndDateFilter = (event) => {
