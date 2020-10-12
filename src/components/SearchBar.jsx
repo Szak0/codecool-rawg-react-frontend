@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
-import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { GamesContext } from "./contexts/GamesContext";
 import InputBase from "@material-ui/core/InputBase";
+import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
@@ -20,23 +21,29 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchBar = () => {
   const classes = useStyles();
-  const [data, games, filters, setFilters] = useContext(GamesContext);
+  const [data, games, filters, setFilters, isLoading, setGames] = useContext(
+    GamesContext
+  );
   const minSearch = 3;
   const paginate = 1;
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     const target = event.target.value;
+    console.log(target);
     if (target.length >= minSearch) {
-      setFilters({ ...filters, search: event.target.value, page: paginate });
-    } else if (target.length < minSearch) {
-      setFilters({ ...filters, search: "", page: paginate });
+      setGames([]);
+      setFilters({ search: event.target.value, page: paginate });
+    } else if (target.length < 3) {
+      setGames([]);
+      setFilters({ search: "", page: paginate });
     }
   };
   return (
-    <div>
+    <div className={classes.search}>
+      <div className={classes.searchIcon}></div>
       <InputBase
         onSubmit={(event) => event.preventDefault()}
-        placeholder={"Found " + data.count + " games"}
+        placeholder={"Search..."}
         type="text"
         classes={{
           root: classes.inputRoot,
