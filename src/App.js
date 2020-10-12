@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   title: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+    },
     textTransform: "uppercase",
     position: "relative",
     fontSize: "18px",
@@ -117,7 +121,20 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: +drawerWidth,
   },
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+  sectionMobile: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
 }));
+
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
@@ -190,6 +207,15 @@ function App() {
                       <Route exact path="/popular-in-2019">
                         <GamesList />
                       </Route>
+                      <Route exact path="/last-30-days">
+                        <GamesList />
+                      </Route>
+                      <Route exact path="/this-week">
+                        <GamesList />
+                      </Route>
+                      <Route exact path="/next-week">
+                        <GamesList />
+                      </Route>
                     </Switch>
                   </Box>
                 </main>
@@ -198,6 +224,10 @@ function App() {
                   handleDrawerClose={handleDrawerClose}
                   theme={theme}
                   open={open}
+                  handleMenuClose={handleMenuClose}
+                  handleMobileMenuClose={handleMobileMenuClose}
+                  anchorEl={anchorEl}
+                  mobileMoreAnchorEl={mobileMoreAnchorEl}
                 />
               </GamesProvider>
             </div>
