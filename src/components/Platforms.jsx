@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import windowsLogo from "../static/windows.svg";
 import linux from "../static/linux.svg";
 import mac from "../static/mac.svg";
