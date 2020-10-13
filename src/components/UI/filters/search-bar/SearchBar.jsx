@@ -31,11 +31,12 @@ const SearchBar = () => {
     console.log(target);
     if (target.length >= minSearch) {
       setGames([]);
-      setFilters({ search: event.target.value, page: paginate });
-    } else if (target.length < 3) {
-      setGames([]);
-      setFilters({ search: "", page: paginate });
+      setFilters({ search: event.target.value, page: paginate, ordering: "-rating" });
     }
+    else {
+      setGames([]);
+      setFilters({});
+    } 
   };
   return (
     <div className={classes.search}>

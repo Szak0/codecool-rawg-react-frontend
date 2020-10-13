@@ -28,8 +28,9 @@ export const GamesProvider = (props) => {
       setIsLoading(true);
       try {
         const request = await axios({
-          url: `https://api.rawg.io/api/games?` + paramString,
+          url: `http://localhost:8080/api/games?` + paramString,
         });
+        console.log(request);
         setData(request.data);
         setGames((game) => [...game, ...request.data.results]);
         setIsLoading(false);
