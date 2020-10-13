@@ -30,11 +30,15 @@ export const GamesProvider = (props) => {
         const request = await axios({
           url: `http://localhost:8080/api/games?` + paramString,
         });
+        if (request.data.results){
+          setGames((game) => [...game, ...request.data.results]);
+        }else{
+          setIsError(true);
+        }
         console.log(request);
         setData(request.data);
-        setGames((game) => [...game, ...request.data.results]);
         setIsLoading(false);
-      } catch (error) {
+      }catch (error) {
         setIsError(true);
       }
     };
