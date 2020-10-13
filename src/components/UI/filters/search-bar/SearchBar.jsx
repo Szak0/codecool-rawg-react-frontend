@@ -27,16 +27,10 @@ const SearchBar = () => {
   const paginate = 1;
 
   const handleSearch = async (event) => {
-    const target = event.target.value;
-    console.log(target);
-    if (target.length >= minSearch) {
+    if (event.key === 'Enter') {
       setGames([]);
-      setFilters({ search: event.target.value, page: paginate, ordering: "-rating" });
+      setFilters({ search: event.target.value, page: paginate });
     }
-    else {
-      setGames([]);
-      setFilters({});
-    } 
   };
   return (
     <div className={classes.search}>
@@ -50,7 +44,7 @@ const SearchBar = () => {
           input: classes.inputInput,
         }}
         name={filters.search}
-        onChange={handleSearch}
+        onKeyDown={handleSearch}
       />
     </div>
   );
