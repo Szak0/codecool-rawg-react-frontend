@@ -1,17 +1,15 @@
 import React, { useContext } from "react";
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AllTimeTop from "../logos/AllTimeTopLogo";
 import PopularLogo from "../logos/PopularLogo";
 import ThisWeekLogo from "../logos/ThisWeekLogo";
 import NextWeekLogo from "../logos/NextWeekLogo";
 import BestOfTheYearLogo from "../logos/BestOfTheYearLogo";
-import { Link } from "react-router-dom";
 import { GamesContext } from "../../contexts/GamesContext";
 import Divider from "@material-ui/core/Divider";
-import DrawerItem from "./DrawrItem"
+import DrawerItem from "./DrawerItem"
 
 import StarLogo from "../logos/StarLogo";
 
@@ -70,7 +68,6 @@ const DrawerContent = () => {
   return (
     <div>
       <List>
-
         <ListItem button>
           <ListItemText primary={"Home"} />
         </ListItem>
@@ -78,84 +75,46 @@ const DrawerContent = () => {
         <ListItem>
           <ListItemText primary={"Tops"} />
         </ListItem>
-        <DrawerItem text={"All time top"} onclick={handleAllTimeTop} link={"/all-time-top"} />
-        <Link
-          to="/all-time-top"
-          className="normalize-link"
-          onClick={handleAllTimeTop}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <AllTimeTop />
-            </ListItemIcon>
-            <ListItemText primary={"All time top"} />
-          </ListItem>
-        </Link>
-        <Link
-          to="/best-of-the-year"
-          className="normalize-link"
-          onClick={handleBestOfTheYear}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <BestOfTheYearLogo />
-            </ListItemIcon>
-            <ListItemText primary={"Best of the year"} />
-          </ListItem>
-        </Link>
-        <Link
-          to="/popular-in-2019"
-          className="normalize-link"
-          onClick={handlePopularLastYear}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <PopularLogo />
-            </ListItemIcon>
-            <ListItemText primary={"Popular in 2019"} />
-          </ListItem>
-        </Link>
+        <DrawerItem 
+          text={"All time top"} 
+          onclick={handleAllTimeTop} 
+          link={"/all-time-top"} 
+          component={<AllTimeTop />} 
+        />
+        <DrawerItem 
+          text={"Best of the year"} 
+          onclick={handleBestOfTheYear} 
+          link={"/best-of-the-year"} 
+          component={<BestOfTheYearLogo />}
+        />
+        <DrawerItem 
+          text={"Popular in 2019"} 
+          onclick={handlePopularLastYear} 
+          link={"/popular-in-2019"} 
+          component={<PopularLogo />}
+        />
         <Divider />
         <ListItem>
           <ListItemText primary={"New Releases"} />
         </ListItem>
-
-        <Link
-          to="/last-30-days"
-          className="normalize-link"
-          onClick={handleLast30Days}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <StarLogo />
-            </ListItemIcon>
-            <ListItemText primary={"Last 30 days"} />
-          </ListItem>
-        </Link>
-        <Link
-          to="/this-week"
-          className="normalize-link"
-          onClick={handleThisWeek}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <ThisWeekLogo />
-            </ListItemIcon>
-            <ListItemText primary={"This Week"} />
-          </ListItem>
-        </Link>
-        <Link
-          to="/next-week"
-          className="normalize-link"
-          onClick={handleNextWeek}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <NextWeekLogo />
-            </ListItemIcon>
-            <ListItemText primary={"Next Week"} />
-          </ListItem>
-        </Link>
+        <DrawerItem 
+          text={"Last 30 days"} 
+          onclick={handleLast30Days} 
+          link={"/last-30-days"} 
+          component={ <StarLogo />}
+        />
+        <DrawerItem 
+          text={"This Week"} 
+          onclick={handleThisWeek} 
+          link={"/this-week"} 
+          component={ <ThisWeekLogo /> }
+        />
+        <DrawerItem 
+          text={"Next Week"} 
+          onclick={handleNextWeek} 
+          link={"/next-week"} 
+          component={  <NextWeekLogo /> }
+        />
         <Divider />
       </List>
     </div>

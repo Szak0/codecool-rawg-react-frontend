@@ -6,17 +6,17 @@ import ListItem from "@material-ui/core/ListItem";
 import { Link } from "react-router-dom";
 import { GamesContext } from "../../contexts/GamesContext";
 
-const DrawerItem = ({text, link, onClick}) => {
+const DrawerItem = ({text, link, onclick, component}) => {
 
     return (
         <Link
           to={link}
           className="normalize-link"
-          onClick={onClick}
+          onClick={onclick}
         >
           <ListItem button>
             <ListItemIcon>
-              <AllTimeTop />
+              {component}
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
