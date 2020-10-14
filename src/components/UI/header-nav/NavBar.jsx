@@ -34,6 +34,7 @@ const NavBar = ({
     setFilters,
     isLoading,
     setGames,
+    isError,
     anchorEl,
     mobileMoreAnchorEl,
   ] = useContext(GamesContext);
