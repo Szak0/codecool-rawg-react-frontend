@@ -1,10 +1,8 @@
-import React, { useContext } from 'react'
-import AllTimeTop from "../logos/AllTimeTopLogo";
+import React from 'react'
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
 import { Link } from "react-router-dom";
-import { GamesContext } from "../../contexts/GamesContext";
 
 const DrawerItem = ({text, link, onclick, component}) => {
 

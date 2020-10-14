@@ -17,12 +17,25 @@ const DrawerContent = () => {
   const [data, games, filters, setFilters, isLoading, setGames] = useContext(
     GamesContext
   );
+  
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth() + 1;
+  const currentDay = today.getDate();
+  const nextWeekDate = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
+  const afterNextWeek = new Date(nextWeekDate.getFullYear(), nextWeekDate.getMonth(), nextWeekDate.getDate()+7);
+  const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
 
+  const formatMonth = (month) => {
+    if (month < 10) {
+      return 0 + `${month}`
+    }
+  }
   const handleAllTimeTop = () => {
     setFilters({
       page: 1,
       ordering: "-rating",
-      dates: "1920-01-01,2020-01-01",
+      dates: `1920-01-01,${currentYear}-12-31`,
     });
     setGames([]);
   };
@@ -30,7 +43,7 @@ const DrawerContent = () => {
     setFilters({
       page: 1,
       ordering: "-rating",
-      dates: "2019-01-01,2020-01-01",
+      dates: `${currentYear - 1}-01-01,${currentYear}-01-01`,
     });
     setGames([]);
   };
@@ -38,7 +51,7 @@ const DrawerContent = () => {
     setFilters({
       page: 1,
       ordering: "-rating",
-      dates: "2020-01-01,2020-12-31",
+      dates: `${currentYear}-01-01,${currentYear}-12-31`,
     });
     setGames([]);
   };
@@ -46,7 +59,7 @@ const DrawerContent = () => {
     setFilters({
       page: 1,
       ordering: "-added",
-      dates: "2020-10-05,2020-10-11",
+      dates: `${nextWeekDate.getFullYear()}-${nextWeekDate.getMonth() + 1}-${nextWeekDate.getDate()},${afterNextWeek.getFullYear()}-${afterNextWeek.getMonth() + 1}-${afterNextWeek.getDate()}`,
     });
     setGames([]);
   };
@@ -54,14 +67,14 @@ const DrawerContent = () => {
     setFilters({
       page: 1,
       ordering: "-added",
-      dates: "2020-09-28,2020-10-04",
+      dates: `${currentYear}-${currentMonth}-${currentDay},${nextWeekDate.getFullYear()}-${nextWeekDate.getMonth() + 1}-${nextWeekDate.getDate()}`,
     });
   };
   const handleLast30Days = () => {
     setFilters({
       page: 1,
       ordering: "-added",
-      dates: "2020-09-02,2020-10-02",
+      dates: `${lastMonth.getFullYear()}-${formatMonth(lastMonth.getMonth() + 1)}-${lastMonth.getDate()},${currentYear}-${currentMonth}-${currentDay}`,
     });
     setGames([]);
   };
@@ -79,19 +92,19 @@ const DrawerContent = () => {
           text={"All time top"} 
           onclick={handleAllTimeTop} 
           link={"/all-time-top"} 
-          component={<AllTimeTop />} 
+          component={ <AllTimeTop /> } 
         />
         <DrawerItem 
           text={"Best of the year"} 
           onclick={handleBestOfTheYear} 
           link={"/best-of-the-year"} 
-          component={<BestOfTheYearLogo />}
+          component={ <BestOfTheYearLogo /> }
         />
         <DrawerItem 
           text={"Popular in 2019"} 
           onclick={handlePopularLastYear} 
           link={"/popular-in-2019"} 
-          component={<PopularLogo />}
+          component={ <PopularLogo /> }
         />
         <Divider />
         <ListItem>
@@ -101,7 +114,7 @@ const DrawerContent = () => {
           text={"Last 30 days"} 
           onclick={handleLast30Days} 
           link={"/last-30-days"} 
-          component={ <StarLogo />}
+          component={ <StarLogo /> }
         />
         <DrawerItem 
           text={"This Week"} 
@@ -113,7 +126,7 @@ const DrawerContent = () => {
           text={"Next Week"} 
           onclick={handleNextWeek} 
           link={"/next-week"} 
-          component={  <NextWeekLogo /> }
+          component={ <NextWeekLogo /> }
         />
         <Divider />
       </List>

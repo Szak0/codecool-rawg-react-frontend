@@ -22,7 +22,7 @@ export const GamesProvider = (props) => {
 
   useEffect(() => {
     const paramString = queryString.stringify(filters);
-    console.log(paramString);
+    console.log(paramString, "param string");
     const fetchData = async () => {
       setIsError(null);
       setIsLoading(true);
