@@ -11,6 +11,7 @@ import BestOfTheYearLogo from "../logos/BestOfTheYearLogo";
 import { Link } from "react-router-dom";
 import { GamesContext } from "../../contexts/GamesContext";
 import Divider from "@material-ui/core/Divider";
+import DrawerItem from "./DrawrItem"
 
 import StarLogo from "../logos/StarLogo";
 
@@ -69,6 +70,7 @@ const DrawerContent = () => {
   return (
     <div>
       <List>
+
         <ListItem button>
           <ListItemText primary={"Home"} />
         </ListItem>
@@ -76,7 +78,7 @@ const DrawerContent = () => {
         <ListItem>
           <ListItemText primary={"Tops"} />
         </ListItem>
-
+        <DrawerItem text={"All time top"} onclick={handleAllTimeTop} link={"/all-time-top"} />
         <Link
           to="/all-time-top"
           className="normalize-link"

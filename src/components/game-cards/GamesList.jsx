@@ -25,7 +25,7 @@ const GamesList = () => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
-          console.log("visible");
+          // console.log("visible");
           setFilters({
             ...filters,
             page: filters.page + 1,
@@ -33,7 +33,7 @@ const GamesList = () => {
         }
       });
       if (node) observer.current.observe(node);
-      console.log(node);
+      // console.log(node);
     },
     [filters, isLoading, setFilters]
   );
