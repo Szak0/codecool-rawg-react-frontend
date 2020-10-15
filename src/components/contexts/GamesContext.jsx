@@ -22,7 +22,7 @@ export const GamesProvider = (props) => {
 
   useEffect(() => {
     const paramString = queryString.stringify(filters);
-    console.log(paramString);
+    console.log(paramString, "param string");
     const fetchData = async () => {
       setIsError(null);
       setIsLoading(true);
@@ -32,13 +32,13 @@ export const GamesProvider = (props) => {
         });
         if (request.data.results){
           setGames((game) => [...game, ...request.data.results]);
-        }else{
+        } else {
           setIsError(true);
         }
-        console.log(request);
         setData(request.data);
+        console.log(request.data);
         setIsLoading(false);
-      }catch (error) {
+      } catch (error) {
         setIsError(true);
       }
     };
