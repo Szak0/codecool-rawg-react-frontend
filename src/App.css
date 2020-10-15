@@ -15,7 +15,10 @@
 }
 .normalize-link {
   text-decoration: none;
-  color: rgb(255, 255, 255);
+  color: white;
+}
+.navbar-brand {
+  color: white;
 }
 .side-logo-svg {
   width: 32px;
@@ -31,7 +34,6 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
   letter-spacing: 0;
-  color: #fff;
   text-rendering: optimizeLegibility;
 }
 .game-list-container {
@@ -129,7 +131,7 @@ body {
 }
 .rating-number {
   font-size: 17px;
-  color: rgb(255, 255, 255);
+
   float: right;
   width: 100%;
 }
