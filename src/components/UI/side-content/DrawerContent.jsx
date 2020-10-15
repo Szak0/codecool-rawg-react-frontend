@@ -69,6 +69,7 @@ const DrawerContent = () => {
       ordering: "-added",
       dates: `${currentYear}-${currentMonth}-${currentDay},${nextWeekDate.getFullYear()}-${nextWeekDate.getMonth() + 1}-${nextWeekDate.getDate()}`,
     });
+    setGames([]);
   };
   const handleLast30Days = () => {
     setFilters({
