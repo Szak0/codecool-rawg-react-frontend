@@ -45,7 +45,7 @@ const GameItem = ({ game }) => {
       <Link to={"game/" + game.id} className={"normalize-link"}>
         <div className={"game-card-info"} key={game.rating + game.name}>
           <div>
-            <h3>{game.name}</h3>
+            <h3><p>{game.name}</p></h3>
           </div>
           <span>{game.released}</span>
           <Platforms platforms={game.platforms} />
