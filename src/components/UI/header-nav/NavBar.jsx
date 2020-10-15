@@ -103,7 +103,6 @@ const NavBar = ({
   return (
     <div className={classes.grow}>
       <AppBar
-        style={{ background: "#000" }}
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
