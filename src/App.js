@@ -6,16 +6,21 @@ import LeftSideDrawer from "./components/UI/side-content/LeftSideDrawer";
 import { GamesProvider } from "./components/contexts/GamesContext";
 import GamesList from "./components/game-cards/GamesList";
 import Filters from "./components/UI/filters/ordering-filter/Filters";
-import DateFilter from "./components/UI/filters/date-filter/DateFilter";
+import GameListByTag from "./components/game-cards/GameListByTag";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { ThemeProvider } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
-
 import clsx from "clsx";
 import "./App.css";
-import {useStyles, darkTheme} from "./Styles"
+import { useStyles, darkTheme } from "./Styles";
+import LoadingRing from "./components/UI/loading-ring/LoadingRing";
+import ListViewDetails from "./components/game-cards/ListViewDetails";
+import GamesLikeThis from "./components/game-detail/GamesLikeThis";
+import SearchBar from "./components/UI/filters/search-bar/SearchBar";
+import DateFilter from "./components/UI/filters/date-filter/DateFilter";
+import AllFilter from "./components/UI/filters/AllFilter/AllFilter";
 
 function App() {
   const classes = useStyles();
@@ -49,10 +54,10 @@ function App() {
     <React.Fragment>
       <BrowserRouter>
         <ThemeProvider theme={darkTheme}>
-          <Paper>
+          <Paper className={classes.paperBack}>
             <div className="app_">
               <GamesProvider>
-              <CssBaseline />
+                <CssBaseline />
                 <NavBar
                   classes={classes}
                   handleDrawerOpen={handleDrawerOpen}
@@ -64,36 +69,61 @@ function App() {
                     [classes.contentShift]: open,
                   })}
                 >
-                  <Box>
-                    <Switch>
-                      <Route path={"/"} exact={true}>
-                        <Filters />
-                        <DateFilter />
-                        <GamesList />
-                      </Route>
-                      <Route exact path="/game/:id">
-                        <GameDetails />
-                      </Route>
-                      <Route exact path="/all-time-top">
-                        <GamesList />
-                      </Route>
-                      <Route exact path="/best-of-the-year">
-                        <GamesList />
-                      </Route>
-                      <Route exact path="/popular-in-2019">
-                        <GamesList />
-                      </Route>
-                      <Route exact path="/last-30-days">
-                        <GamesList />
-                      </Route>
-                      <Route exact path="/this-week">
-                        <GamesList />
-                      </Route>
-                      <Route exact path="/next-week">
-                        <GamesList />
-                      </Route>
-                    </Switch>
-                  </Box>
+                  <Switch>
+                    <Route path={"/"} exact={true}>
+                      <ListViewDetails />
+                      <AllFilter />
+                      <GamesList />
+                      <LoadingRing />
+                    </Route>
+                    <Route exact path="/game/:id">
+                      <GameDetails />
+                      <GamesLikeThis />
+                      <LoadingRing />
+                    </Route>
+                    <Route exact path="/tag/:tag" name="tag-page">
+                      <ListViewDetails />
+                      <AllFilter />
+                      <GameListByTag />
+                      <LoadingRing />
+                    </Route>
+                    <Route exact path="/all-time-top">
+                      <ListViewDetails />
+                      <AllFilter />
+                      <GamesList />
+                      <LoadingRing />
+                    </Route>
+                    <Route exact path="/best-of-the-year">
+                      <ListViewDetails />
+                      <AllFilter />
+                      <GamesList />
+                      <LoadingRing />
+                    </Route>
+                    <Route exact path="/popular-in-2019">
+                      <ListViewDetails />
+                      <AllFilter />
+                      <GamesList />
+                      <LoadingRing />
+                    </Route>
+                    <Route exact path="/last-30-days">
+                      <ListViewDetails />
+                      <AllFilter />
+                      <GamesList />
+                      <LoadingRing />
+                    </Route>
+                    <Route exact path="/this-week">
+                      <ListViewDetails />
+                      <AllFilter />
+                      <GamesList />
+                      <LoadingRing />
+                    </Route>
+                    <Route exact path="/next-week">
+                      <ListViewDetails />
+                      <AllFilter />
+                      <GamesList />
+                      <LoadingRing />
+                    </Route>
+                  </Switch>
                 </main>
                 <LeftSideDrawer
                   classes={classes}
@@ -104,6 +134,7 @@ function App() {
                   handleMobileMenuClose={handleMobileMenuClose}
                   anchorEl={anchorEl}
                   mobileMoreAnchorEl={mobileMoreAnchorEl}
+                  setOpen={setOpen}
                 />
               </GamesProvider>
             </div>
