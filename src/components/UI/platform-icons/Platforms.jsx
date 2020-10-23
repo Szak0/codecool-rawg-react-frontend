@@ -41,10 +41,10 @@ const Platforms = (props) => {
   iterateOnPlatforms();
   return (
     <div>
-      {platformPics.map((pics, index) => (
+      {platformPics.map((src, index) => (
         <img
           key={index}
-          src={pics}
+          src={src}
           alt=""
           style={{ width: "14px", marginLeft: "4px" }}
         />

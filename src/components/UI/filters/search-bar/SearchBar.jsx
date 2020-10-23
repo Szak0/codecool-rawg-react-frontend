@@ -1,19 +1,21 @@
 import React, { useContext } from "react";
 import { GamesContext } from "../../../contexts/GamesContext";
 import InputBase from "@material-ui/core/InputBase";
-import {useStyles} from './search-bar-styling'
-
+import { useStyles } from "./search-bar-styling";
+import { useHistory } from "react-router-dom";
 
 const SearchBar = () => {
-  
   const classes = useStyles();
+  const history = useHistory();
+
   const [data, games, filters, setFilters, isLoading, setGames] = useContext(
     GamesContext
   );
 
   const paginate = 1;
   const handleSearch = async (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
+      history.push("/");
       setGames([]);
       setFilters({ search: event.target.value, page: paginate });
     }
