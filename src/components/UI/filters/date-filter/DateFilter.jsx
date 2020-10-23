@@ -20,10 +20,11 @@ const DateFilter = () => {
 
   const handleStartDateFilter = (event) => {
     setDateFrom(event.target.value);
-    setGames([]);
   };
 
   const handleEndDateFilter = (event) => {
+    console.log(event);
+    event.persist();
     let dates = `${dateFrom},${event.target.value}`;
     if (dates[0] === ",") {
       dates = "";
@@ -33,6 +34,7 @@ const DateFilter = () => {
       page: 1,
       dates: dates,
     });
+    setGames([]);
   };
   return (
     <div className={"date-form-filter"}>
@@ -41,7 +43,7 @@ const DateFilter = () => {
           id="date"
           label="From"
           type="date"
-          defaultValue="yyyy-mm-dd"
+          defaultValue="yyyy-MM-dd"
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
