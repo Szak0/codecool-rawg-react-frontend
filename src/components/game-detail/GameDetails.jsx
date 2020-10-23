@@ -1,45 +1,88 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Platforms from "../UI/platform-icons/Platforms";
-
-
-
+import { Divider } from "@material-ui/core";
+import { GamesContext } from "../contexts/GamesContext";
 
 const GameDetails = () => {
+  const [
+    data,
+    games,
+    filters,
+    setFilters,
+    isLoading,
+    setGames,
+    isError,
+  ] = useContext(GamesContext);
 
-    const [game, setGame] = useState([]);
-    const [tags, setTags] = useState([]);
-    const [genres, setGenres] = useState([]);
-  let id = window.location.href.split('/').reverse()[0];
-
-
+  const [game, setGame] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [genres, setGenres] = useState([]);
+  let id = window.location.href.split("/").reverse()[0];
+  const setTagPage = (tag) => {
+    setGames([]);
+    setFilters({ tags: tag.toLowerCase().split(" ").join("-"), page: 1 });
+  };
   useEffect(() => {
     const fetchData = async () => {
       const request = await axios(`https://api.rawg.io/api/games/${id}`);
-
       setGame(request.data);
-      setTags(request.data.tags)
-      setGenres(request.data.genres)
-
+      setTags(request.data.tags);
+      setGenres(request.data.genres);
     };
     fetchData();
   }, [id]);
-  console.log(game.tags)
   return (
-    <div className="detailContainer">
-          <div className="gameDetailsTitle ">
-            
-            <img src={game.background_image} alt="" style={{width: "100%", borderRadius: "3px", height: "auto"}} />
-            <h1 className="gameDetailsTitleCentered">{game.name}</h1>
+    <div className={"flex-container"}>
+      <div className={"game-list-container"}>
+        <div className="detailContainer">
+          <div className="gameBackground">
+            <img
+              src={game.background_image}
+              alt=""
+              style={{ width: "100%", height: "auto" }}
+            />
           </div>
-          
-            <p className="release">Release date: {game.released}</p> <br/>
-            <p className="platforms"><Platforms platforms={game.platforms}/></p><br/>
-          <div className="tagsInGenres"> <p className="oneGenre">Genre(s):</p>{genres.map((genres, index) => (<p key={index} className="oneGenre">  {genres.name}  </p>))}</div>
-
-          <div className="detailCard"><p>{game.description_raw}</p></div>
-          <div className="tagsInDetails"> {tags.map((tag, index) => (<p key={index} className="oneTag"> #{tag.name}  </p>))}</div>
+          <div className="game-info">
+            {" "}
+            <h1>{game.name}</h1>
+            <div>
+              <span>Release date: {game.released}</span>
+            </div>
+            <Platforms platforms={game.platforms} />
+            <div>
+              <span>Genre(s): </span>
+              {genres.map((genres, index) => (
+                <span key={index}>#{genres.name} </span>
+              ))}
+            </div>
           </div>
+          <div className="about-game">
+            <h3>About</h3>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: game.description,
+              }}
+            ></div>
+          </div>
+          <Divider />
+          <div className="tagsInDetails">
+            <h3>Tags</h3>
+            <br />
+            {tags.map((tag, index) => (
+              <span key={index} className="oneTag">
+                {" "}
+                <Link className="normalize-link-tags" to={`/tag/${tag.name}`}>
+                  #{tag.name}{" "}
+                </Link>
+              </span>
+            ))}
+          </div>
+        </div>
+        <Divider />
+      </div>
+    </div>
   );
 };
 

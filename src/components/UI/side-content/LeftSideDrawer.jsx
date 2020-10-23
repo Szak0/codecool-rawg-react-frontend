@@ -6,7 +6,17 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Drawer from "@material-ui/core/Drawer";
 import DrawerContent from "../../UI/side-content/DrawerContent";
 
-const LeftSideDrawer = ({ open, classes, handleDrawerClose, theme }) => {
+const LeftSideDrawer = ({
+  classes,
+  handleDrawerClose,
+  theme,
+  open,
+  handleMenuClose,
+  handleMobileMenuClose,
+  anchorEl,
+  mobileMoreAnchorEl,
+  setOpen,
+}) => {
   return (
     <Drawer
       className={classes.drawer}
@@ -27,7 +37,7 @@ const LeftSideDrawer = ({ open, classes, handleDrawerClose, theme }) => {
         </IconButton>
       </div>
       <Divider />
-      <DrawerContent />
+      <DrawerContent setOpen={setOpen} />
     </Drawer>
   );
 };

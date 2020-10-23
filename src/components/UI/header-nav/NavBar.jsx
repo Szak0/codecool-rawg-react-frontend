@@ -15,7 +15,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-
 import SearchBar from "../filters/search-bar/SearchBar";
 import { GamesContext } from "../../contexts/GamesContext";
 
