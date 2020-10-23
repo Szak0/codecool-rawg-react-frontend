@@ -1,9 +1,6 @@
 import React, { useContext, useRef, useCallback } from "react";
 import { GamesContext } from "../contexts/GamesContext";
 import GameItem from "./GameItem";
-import LoadingRing from "../UI/loading-ring/LoadingRing";
-import Filters from "../UI/filters/ordering-filter/Filters";
-import DateFilter from "../UI/filters/date-filter/DateFilter";
 
 const GamesList = () => {
   const [data, games, filters, setFilters, isLoading] = useContext(
