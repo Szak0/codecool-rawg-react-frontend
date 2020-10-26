@@ -15,10 +15,12 @@ export const GamesProvider = (props) => {
   const [filters, setFilters] = useState({
     page: firstPage,
     search: "",
-    ordering: "",
+    ordering: "-relevance",
     dates: "",
     page_size: pageSize,
   });
+
+  const [pathSuffix, setPathSuffix] = useState("/games?");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,14 +32,14 @@ export const GamesProvider = (props) => {
           timeout: 20000,
         });
         const request = await client.get(
-          "/games?" + queryString.stringify(filters)
+          pathSuffix + queryString.stringify(filters)
         );
         if (request.data.results) {
           setGames((game) => [...game, ...request.data.results]);
         } else {
           setIsError(true);
         }
-        console.log("/games?" + queryString.stringify(filters));
+        console.log(pathSuffix + queryString.stringify(filters));
         console.log(request.data);
         setData(request.data);
         setIsLoading(false);
@@ -46,10 +48,19 @@ export const GamesProvider = (props) => {
       }
     };
     fetchData();
-  }, [filters]);
+  }, [filters, pathSuffix]);
   return (
     <GamesContext.Provider
-      value={[data, games, filters, setFilters, isLoading, setGames, isError]}
+      value={[
+        data,
+        games,
+        filters,
+        setFilters,
+        isLoading,
+        setGames,
+        isError,
+        setPathSuffix,
+      ]}
     >
       {props.children}
     </GamesContext.Provider>

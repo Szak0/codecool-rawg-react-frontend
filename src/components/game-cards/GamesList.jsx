@@ -3,9 +3,15 @@ import { GamesContext } from "../contexts/GamesContext";
 import GameItem from "./GameItem";
 
 const GamesList = () => {
-  const [data, games, filters, setFilters, isLoading] = useContext(
-    GamesContext
-  );
+  const [
+    data,
+    games,
+    filters,
+    setFilters,
+    isLoading,
+    setGames,
+    isError,
+  ] = useContext(GamesContext);
 
   const observer = useRef();
   const lastGameCardRef = useCallback(

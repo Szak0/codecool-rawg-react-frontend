@@ -6,9 +6,15 @@ import { useHistory } from "react-router-dom";
 
 const GameListByTag = () => {
   const history = useHistory();
-  const [data, games, filters, setFilters, isLoading, setGames] = useContext(
-    GamesContext
-  );
+  const [
+    data,
+    games,
+    filters,
+    setFilters,
+    isLoading,
+    setGames,
+    isError,
+  ] = useContext(GamesContext);
 
   const { tag } = useParams();
 
