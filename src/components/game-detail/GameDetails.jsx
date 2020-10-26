@@ -4,8 +4,9 @@ import axios from "axios";
 import Platforms from "../UI/platform-icons/Platforms";
 import { Divider } from "@material-ui/core";
 import { GamesContext } from "../contexts/GamesContext";
-
+import { useStyles } from "../../Styles";
 const GameDetails = () => {
+  const classes = useStyles();
   const [
     data,
     games,
@@ -31,11 +32,18 @@ const GameDetails = () => {
       setTags(request.data.tags);
       setGenres(request.data.genres);
     };
+
     fetchData();
   }, [id]);
+
   return (
     <div className={"flex-container"}>
-      <div className={"game-list-container"}>
+      <div
+        style={{
+          padding: "1rem",
+          borderRadius: "1rem",
+        }}
+      >
         <div className="detailContainer">
           <div className="gameBackground">
             <img
@@ -61,6 +69,7 @@ const GameDetails = () => {
           <div className="about-game">
             <h3>About</h3>
             <div
+              className={"discription"}
               dangerouslySetInnerHTML={{
                 __html: game.description,
               }}
@@ -73,7 +82,11 @@ const GameDetails = () => {
             {tags.map((tag, index) => (
               <span key={index} className="oneTag">
                 {" "}
-                <Link className="normalize-link-tags" to={`/tag/${tag.name}`}>
+                <Link
+                  className="normalize-link-tags"
+                  to={`/tag/${tag.name}`}
+                  onClick={() => setTagPage(tag.name)}
+                >
                   #{tag.name}{" "}
                 </Link>
               </span>

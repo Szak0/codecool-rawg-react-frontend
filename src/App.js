@@ -5,11 +5,9 @@ import NavBar from "./components/UI/header-nav/NavBar";
 import LeftSideDrawer from "./components/UI/side-content/LeftSideDrawer";
 import { GamesProvider } from "./components/contexts/GamesContext";
 import GamesList from "./components/game-cards/GamesList";
-import Filters from "./components/UI/filters/ordering-filter/Filters";
 import GameListByTag from "./components/game-cards/GameListByTag";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { useTheme } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
 import { ThemeProvider } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import clsx from "clsx";
@@ -18,9 +16,8 @@ import { useStyles, darkTheme } from "./Styles";
 import LoadingRing from "./components/UI/loading-ring/LoadingRing";
 import ListViewDetails from "./components/game-cards/ListViewDetails";
 import GamesLikeThis from "./components/game-detail/GamesLikeThis";
-import SearchBar from "./components/UI/filters/search-bar/SearchBar";
-import DateFilter from "./components/UI/filters/date-filter/DateFilter";
 import AllFilter from "./components/UI/filters/AllFilter/AllFilter";
+import NewsAndTranding from "./pages/NewsAndTranding";
 
 function App() {
   const classes = useStyles();
@@ -71,6 +68,16 @@ function App() {
                 >
                   <Switch>
                     <Route path={"/"} exact={true}>
+                      <div className={"page-title"}>
+                        <h1>News and tranding</h1>
+                        <span>Based on player counts and release date</span>
+                      </div>
+                      <ListViewDetails />
+                      <AllFilter />
+                      <NewsAndTranding />
+                      <LoadingRing />
+                    </Route>
+                    <Route path={"/all-games"}>
                       <ListViewDetails />
                       <AllFilter />
                       <GamesList />
@@ -88,36 +95,54 @@ function App() {
                       <LoadingRing />
                     </Route>
                     <Route exact path="/all-time-top">
+                      <div className={"page-title"}>
+                        <h1>All time top</h1>
+                      </div>
                       <ListViewDetails />
                       <AllFilter />
                       <GamesList />
                       <LoadingRing />
                     </Route>
                     <Route exact path="/best-of-the-year">
+                      <div className={"page-title"}>
+                        <h1>Best of the year</h1>
+                      </div>
                       <ListViewDetails />
                       <AllFilter />
                       <GamesList />
                       <LoadingRing />
                     </Route>
                     <Route exact path="/popular-in-2019">
+                      <div className={"page-title"}>
+                        <h1>Popular in 2019</h1>
+                      </div>
                       <ListViewDetails />
                       <AllFilter />
                       <GamesList />
                       <LoadingRing />
                     </Route>
                     <Route exact path="/last-30-days">
+                      <div className={"page-title"}>
+                        <h1>Released: Last 30 days</h1>
+                      </div>
                       <ListViewDetails />
                       <AllFilter />
                       <GamesList />
                       <LoadingRing />
                     </Route>
                     <Route exact path="/this-week">
+                      <div className={"page-title"}>
+                        <h1>Released: This week</h1>
+                      </div>
                       <ListViewDetails />
                       <AllFilter />
                       <GamesList />
                       <LoadingRing />
                     </Route>
                     <Route exact path="/next-week">
+                      <div className={"page-title"}>
+                        <h1>Release: Next week</h1>
+                      </div>
                       <ListViewDetails />
                       <AllFilter />
                       <GamesList />

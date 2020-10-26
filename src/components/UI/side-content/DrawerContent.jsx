@@ -20,15 +20,23 @@ import {
 } from "../../date-time/DrawerTimeSetting";
 
 const DrawerContent = ({ setOpen }) => {
-  const [data, games, filters, setFilters, isLoading, setGames] = useContext(
-    GamesContext
-  );
+  const [
+    data,
+    games,
+    filters,
+    setFilters,
+    isLoading,
+    setGames,
+    isError,
+    setPathSuffix,
+  ] = useContext(GamesContext);
   const handleAllTimeTop = () => {
     setFilters({
       page: 1,
       ordering: "-rating",
       dates: `1920-01-01,${today.getFullYear()}-12-31`,
     });
+    setPathSuffix("/games?");
     setGames([]);
     setOpen(false);
   };
@@ -38,6 +46,7 @@ const DrawerContent = ({ setOpen }) => {
       ordering: "-rating",
       dates: `${today.getFullYear() - 1}-01-01,${today.getFullYear()}-01-01`,
     });
+    setPathSuffix("/games?");
     setGames([]);
     setOpen(false);
   };
@@ -47,6 +56,7 @@ const DrawerContent = ({ setOpen }) => {
       ordering: "-rating",
       dates: `${today.getFullYear()}-01-01,${today.getFullYear()}-12-31`,
     });
+    setPathSuffix("/games?");
     setGames([]);
     setOpen(false);
   };
@@ -67,7 +77,7 @@ const DrawerContent = ({ setOpen }) => {
         afterNextWeek.getMonth() + 1
       }-${afterNextWeek.getDate()}`
     );
-
+    setPathSuffix("/games?");
     setGames([]);
     setOpen(false);
   };
@@ -81,6 +91,7 @@ const DrawerContent = ({ setOpen }) => {
         nextWeekDate.getMonth() + 1
       }-${nextWeekDate.getDate()}`,
     });
+    setPathSuffix("/games?");
     setGames([]);
     setOpen(false);
   };
@@ -94,25 +105,33 @@ const DrawerContent = ({ setOpen }) => {
         today.getMonth() + 1
       }-${today.getDate()}`,
     });
+    setPathSuffix("/games?");
     setGames([]);
     setOpen(false);
   };
-  const handleHome = () => {
+  const handleAll = () => {
     setFilters({
       page: 1,
       ordering: "-added",
     });
+    setPathSuffix("/games?");
     setGames([]);
     setOpen(false);
   };
+
   return (
     <div>
       <List>
-        <ListItem button>
-          <Link to="/" className="normalize-link" onClick={handleHome}>
-            <ListItemText primary={"Home"} />
-          </Link>
-        </ListItem>
+        <Link to="/" className="bold-drawer-item">
+          <ListItem button>
+            <ListItemText primary={"News and trending"} />
+          </ListItem>
+        </Link>
+        <Link to="/all-games" className="bold-drawer-item" onClick={handleAll}>
+          <ListItem button>
+            <ListItemText primary={"All Games"} />
+          </ListItem>
+        </Link>
         <ListItem>
           <ListItemText primary={"Tops"} />
         </ListItem>

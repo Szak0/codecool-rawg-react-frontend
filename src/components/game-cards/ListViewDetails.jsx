@@ -9,9 +9,13 @@ const ListViewDetails = () => {
   }
 
   return (
-    <div className={"list-title"}>
-      <h2>About {numberFormat(data.count)} results</h2>
-      <h1>{data.seo_title}</h1>
+    <div>
+      <div className={"page-title"}>
+        <h1>{data.seo_title}</h1>
+      </div>
+      <div className={"list-title"}>
+        <h2>About {numberFormat(data.count)} results</h2>
+      </div>
     </div>
   );
 };
