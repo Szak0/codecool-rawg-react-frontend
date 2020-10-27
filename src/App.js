@@ -79,7 +79,13 @@ function App() {
                       <LoadingRing />
                     </Route>
                     <Route path="/register">
+                      <Register />
+                    </Route>
+                    <Route path="/login">
                       <Login />
+                    </Route>
+                    <Route path="/profile">
+                      <Profile />
                     </Route>
                     <Route path={"/all-games"}>
                       <ListViewDetails />
