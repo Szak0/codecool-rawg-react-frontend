@@ -23,9 +23,14 @@ const Login = () => {
   };
 
   function validateForm() {
-    return (
-      userEmail.length > 0 && userPassword.length > 8 && userName.length > 3
-    );
+    const emailRegex = /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/;
+    if (userEmail.match(emailRegex)) {
+      return (
+        userEmail.length > 0 && userPassword.length > 8 && userName.length > 3
+      );
+    } else {
+      return false;
+    }
   }
 
   const handleEmail = (e) => {
