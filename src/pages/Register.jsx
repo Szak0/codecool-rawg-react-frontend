@@ -7,14 +7,36 @@ import {
   InputLabel,
 } from "@material-ui/core";
 
+const bcrypt = require("bcryptjs");
+const saltRounds = 10;
+
+const passwordHasing = (plainPassword) => {
+  bcrypt.genSalt(saltRounds, function (err, salt) {
+    if (err) {
+      throw err;
+    } else {
+      bcrypt.hash(plainPassword, salt, function (err, hash) {
+        if (err) {
+          throw err;
+        } else {
+          console.log(hash);
+        }
+      });
+    }
+  });
+};
+
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const handlePost = (event) => {
     event.preventDefault();
-    const baseURL = `http://localhost:8080/register`;
+    console.log(passwordConfirmation === userPassword);
+    console.log(passwordConfirmation, userPassword);
+    const baseURL = `http://localhost:8080/api/register`;
     axios.post(baseURL, {
       userName: userName,
       email: userEmail,
@@ -24,12 +46,15 @@ const Login = () => {
 
   function validateForm() {
     const emailRegex = /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/;
-    if (userEmail.match(emailRegex)) {
-      return (
-        userEmail.length > 0 && userPassword.length > 8 && userName.length > 3
-      );
+    if (userEmail || userPassword || userName) {
+      if (userEmail.match(emailRegex)) {
+        return (
+          userEmail.length > 0 && userPassword.length > 8 && userName.length > 3
+        );
+      } else {
+        return false;
+      }
     } else {
-      return false;
     }
   }
 
@@ -42,8 +67,15 @@ const Login = () => {
   };
 
   const handlePassword = (e) => {
-    setUserPassword(e.target.value);
+    e.preventDefault();
+    setUserPassword(passwordHasing(e.target.value));
   };
+
+  const handlePasswordConfirmation = (e) => {
+    e.preventDefault();
+    setPasswordConfirmation(passwordHasing(e.target.value));
+  };
+
   return (
     <div>
       <form>
@@ -71,12 +103,15 @@ const Login = () => {
             onChange={handlePassword}
           />
         </FormControl>
-        <Input
-          type="submit"
-          value="submit"
-          onClick={handlePost}
-          disabled={!validateForm()}
-        />
+        <FormControl>
+          <InputLabel htmlFor="my-input">Confirm Password</InputLabel>
+          <Input
+            id="password-conf"
+            aria-describedby="my-helper-text"
+            onChange={handlePasswordConfirmation}
+          />
+        </FormControl>
+        <Input type="submit" value="submit" onClick={handlePost} />
       </form>
     </div>
   );

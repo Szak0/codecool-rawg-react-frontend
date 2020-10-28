@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "axios-progress-bar": "^1.2.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^4.5.2",
     "cors": "^2.8.5",
     "date-fns": "^2.16.1",
