@@ -26,7 +26,7 @@ const passwordHasing = (plainPassword) => {
   });
 };
 
-const Login = () => {
+const Register = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -48,16 +48,21 @@ const Login = () => {
     const emailRegex = /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/;
     if (userEmail || userPassword || userName) {
       if (userEmail.match(emailRegex)) {
-        return (
-          userEmail.length > 0 && userPassword.length > 8 && userName.length > 3
-        );
-      } else {
-        return false;
-      }
-    } else {
+        if (userEmail.length > 0 
+          && userPassword.length > 8 
+          && userName.length > 3){
+          return validateMatchingPasswords();
+        }
+     else {
+       return false;
     }
   }
+}
+}
 
+  function validateMatchingPasswords(){
+    return userPassword.match(passwordConfirmation);   
+  }
   const handleEmail = (e) => {
     setUserEmail(e.target.value);
   };
@@ -68,11 +73,16 @@ const Login = () => {
 
   const handlePassword = (e) => {
     e.preventDefault();
+    console.log("Az első " + e.target.value);
+    console.log("Az első hasing " + passwordHasing(e.target.value));
+
     setUserPassword(passwordHasing(e.target.value));
   };
 
   const handlePasswordConfirmation = (e) => {
     e.preventDefault();
+    console.log("A második " + e.target.value);
+    console.log("A második hasing " + passwordHasing(e.target.value));
     setPasswordConfirmation(passwordHasing(e.target.value));
   };
 
@@ -117,4 +127,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
