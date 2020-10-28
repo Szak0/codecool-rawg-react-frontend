@@ -26,10 +26,9 @@ const Register = () => {
           if (err) {
             throw err;
           } else {
+              sendRequest(hash);
             console.log(hash);
-            sendRequest(hash);
-          
-            
+               
           }
         });
       }
@@ -49,9 +48,11 @@ const Register = () => {
 
   const handlePost = (event) => {
     event.preventDefault();
-    passwordHasing(userPassword);
+    // if (validateForm) {
+    //   passwordHasing(userPassword)
+    // }
+    
       
-
   };
 
   function validateForm() {
@@ -71,7 +72,8 @@ const Register = () => {
 }
 
   function validateMatchingPasswords(){
-    return userPassword.match(passwordConfirmation);   
+    return userPassword === passwordConfirmation;
+    // return userPassword.match(passwordConfirmation);   
   }
   const handleEmail = (e) => {
     setUserEmail(e.target.value);
