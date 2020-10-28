@@ -10,21 +10,6 @@ import {
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
-const passwordHasing = (plainPassword) => {
-  bcrypt.genSalt(saltRounds, function (err, salt) {
-    if (err) {
-      throw err;
-    } else {
-      bcrypt.hash(plainPassword, salt, function (err, hash) {
-        if (err) {
-          throw err;
-        } else {
-          console.log(hash);
-        }
-      });
-    }
-  });
-};
 
 const Register = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -32,10 +17,38 @@ const Register = () => {
   const [userPassword, setUserPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
+  const passwordHasing = (plainPassword) => {
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      if (err) {
+        throw err;
+      } else {
+        bcrypt.hash(plainPassword, salt, function (err, hash) {
+          if (err) {
+            throw err;
+          } else {
+            console.log(hash);
+            setUserPassword(hash)
+            console.log(userPassword);
+            
+          }
+        });
+      }
+    });
+  };
+  
+
   const handlePost = (event) => {
+    const bcrypt = require("bcryptjs");
+    const saltRounds = 10;
     event.preventDefault();
-    console.log(passwordConfirmation === userPassword);
-    console.log(passwordConfirmation, userPassword);
+    bcrypt.genSalt(saltRounds, function (err, salt){
+      bcrypt.hash(userPassword, salt, function (err, hash) {
+          console.log(hash)
+          console.log(userPassword);
+          
+        }
+      )}
+    
     const baseURL = `http://localhost:8080/api/register`;
     axios.post(baseURL, {
       userName: userName,
@@ -74,16 +87,13 @@ const Register = () => {
   const handlePassword = (e) => {
     e.preventDefault();
     console.log("Az első " + e.target.value);
-    console.log("Az első hasing " + passwordHasing(e.target.value));
-
-    setUserPassword(passwordHasing(e.target.value));
+    setUserPassword(e.target.value);
   };
 
   const handlePasswordConfirmation = (e) => {
     e.preventDefault();
     console.log("A második " + e.target.value);
-    console.log("A második hasing " + passwordHasing(e.target.value));
-    setPasswordConfirmation(passwordHasing(e.target.value));
+    setPasswordConfirmation(e.target.value);
   };
 
   return (
