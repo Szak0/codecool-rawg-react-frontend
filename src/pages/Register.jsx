@@ -51,6 +51,7 @@ const Register = () => {
     event.preventDefault();
     passwordHasing(userPassword);
       
+
   };
 
   function validateForm() {
