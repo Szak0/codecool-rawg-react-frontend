@@ -38,17 +38,7 @@ const Register = () => {
   
 
   const handlePost = (event) => {
-    const bcrypt = require("bcryptjs");
-    const saltRounds = 10;
-    event.preventDefault();
-    bcrypt.genSalt(saltRounds, function (err, salt){
-      bcrypt.hash(userPassword, salt, function (err, hash) {
-          console.log(hash)
-          console.log(userPassword);
-          
-        }
-      )}
-    
+    event.preventDefault();  
     const baseURL = `http://localhost:8080/api/register`;
     axios.post(baseURL, {
       userName: userName,
@@ -93,6 +83,7 @@ const Register = () => {
   const handlePasswordConfirmation = (e) => {
     e.preventDefault();
     console.log("A második " + e.target.value);
+    console.log("A második:");
     setPasswordConfirmation(e.target.value);
   };
 
