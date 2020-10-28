@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   FormControl,
@@ -17,7 +17,7 @@ const Register = () => {
   const [userPassword, setUserPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const passwordHasing = (plainPassword) => {
+  const passwordHasing = async (plainPassword) => {
     bcrypt.genSalt(saltRounds, function (err, salt) {
       if (err) {
         throw err;
@@ -27,8 +27,8 @@ const Register = () => {
             throw err;
           } else {
             console.log(hash);
-            setUserPassword(hash)
-            console.log(userPassword);
+            sendRequest(hash);
+          
             
           }
         });
@@ -36,15 +36,22 @@ const Register = () => {
     });
   };
   
+  const sendRequest = (hash) => {
+    const baseURL = `http://localhost:8080/api/register`;
+      axios.post(baseURL, {
+        userName: userName,
+        email: userEmail,
+        password: hash
+      });
+  }
+
+
 
   const handlePost = (event) => {
-    event.preventDefault();  
-    const baseURL = `http://localhost:8080/api/register`;
-    axios.post(baseURL, {
-      userName: userName,
-      email: userEmail,
-      password: userPassword,
-    });
+    event.preventDefault();
+    passwordHasing(userPassword);
+      
+
   };
 
   function validateForm() {
@@ -82,7 +89,6 @@ const Register = () => {
 
   const handlePasswordConfirmation = (e) => {
     e.preventDefault();
-    console.log("A második " + e.target.value);
     setPasswordConfirmation(e.target.value);
   };
 
