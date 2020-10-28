@@ -18,7 +18,7 @@ import ListViewDetails from "./components/game-cards/ListViewDetails";
 import GamesLikeThis from "./components/game-detail/GamesLikeThis";
 import AllFilter from "./components/UI/filters/AllFilter/AllFilter";
 import NewsAndTranding from "./pages/NewsAndTranding";
-// import Login from "./pages/Login";
+import Login from "./pages/Login";
 import Register from "./pages/Register"
 
 function App() {
@@ -82,9 +82,9 @@ function App() {
                     <Route path="/register">
                       <Register />
                     </Route>
-                    {/* <Route path="/login">
+                    <Route path="/login">
                       <Login />
-                    </Route> */}
+                    </Route>
                     {/* <Route path="/profile">
                       <Profile />
                     </Route> */}
