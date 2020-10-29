@@ -82,11 +82,7 @@ const GameDetails = () => {
             {tags.map((tag, index) => (
               <span key={index} className="oneTag">
                 {" "}
-                <Link
-                  className="normalize-link-tags"
-                  to={`/tag/${tag.name}`}
-                  onClick={() => setTagPage(tag.name)}
-                >
+                <Link className="normalize-link-tags" to={`/tag/${tag.name}`}>
                   #{tag.name}{" "}
                 </Link>
               </span>

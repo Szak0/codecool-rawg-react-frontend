@@ -8,14 +8,22 @@ const SearchBar = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const [data, games, filters, setFilters, isLoading, setGames] = useContext(
-    GamesContext
-  );
+  const [
+    data,
+    games,
+    filters,
+    setFilters,
+    isLoading,
+    setGames,
+    isError,
+    setPathSuffix,
+  ] = useContext(GamesContext);
 
   const paginate = 1;
   const handleSearch = async (event) => {
     if (event.key === "Enter") {
-      history.push("/");
+      setPathSuffix("/games?");
+      history.push("/all-games");
       setGames([]);
       setFilters({ search: event.target.value, page: paginate });
     }
