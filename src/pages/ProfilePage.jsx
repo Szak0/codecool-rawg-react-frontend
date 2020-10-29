@@ -1,11 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import GamesList from '../components/game-cards/GamesList'
+import WishListContainer from "../components/wishlist/WishListContainer";
 
 const ProfilePage = () => {
 
     let id = window.location.href.split("/").reverse()[0];
 
     const [data, setData] = useState([]);
+    const [games, setGames] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,6 +23,31 @@ const ProfilePage = () => {
         };
         fetchData();
     }, [id]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const client = axios.create({
+                    baseURL: `http://localhost:8080/api/wishlist`,
+                    timeout: 20000,
+                });
+                const request = await client.get();
+                console.log(request.data);
+
+                if (request.data) {
+                    setGames((game) => [...game, ...request.data]);
+                } else {
+                    setIsError(true);
+                }
+
+                console.log(request.data);
+                setIsLoading(false);
+            } catch (error) {
+                setIsError(true);
+            }
+        };
+        fetchData();
+    }, []);
 
     const getRegDate = (date) => {
         if (date) {
@@ -35,6 +65,8 @@ const ProfilePage = () => {
                     <span>{data.email}</span>
                     <div>{getRegDate(data.registrationDate)}</div>
                 </div>
+
+                <WishListContainer games={games} />
             </div>
 
         </div>
