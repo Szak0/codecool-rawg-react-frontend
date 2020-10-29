@@ -3,11 +3,27 @@ import StarRatings from "react-star-ratings";
 import { Link } from "react-router-dom";
 import Platforms from "../UI/platform-icons/Platforms";
 import NoImageUrl from "../../static/noImagePlaceholder/no_image_to_show_.webp";
+import axios from "axios";
 
 const GameItem = ({ game }) => {
   const [videInfo, seVideoInfo] = useState({
     vidRef: useRef(null),
   });
+
+
+  const handleWish = async (e) => {
+    const baseURL = `http://localhost:8080/api/wishlist/add`;
+    const sentData = {
+      gameId: game.id,
+      name: game.name,
+      background_image: game.background_image,
+      released: game.released,
+      rating: game.rating,
+    }
+    console.log(sentData, "DATA");
+    await axios.post(baseURL, sentData);
+  }
+
 
   // const handlePlayVideo = () => {
   //   videInfo.vidRef.current.play();
@@ -22,7 +38,6 @@ const GameItem = ({ game }) => {
     }
     return "";
   }
-
   return (
     <div className="game-card">
       <div className="media-container">
@@ -52,18 +67,18 @@ const GameItem = ({ game }) => {
             </video> */}
           </div>
         ) : (
-          <div>
-            {game.background_image ? (
-              <img
-                className={"img-card"}
-                src={cropImage(game.background_image)}
-                alt={game.name}
-              />
-            ) : (
-              <img className={"img-card"} src={NoImageUrl} alt={game.name} />
-            )}
-          </div>
-        )}
+            <div>
+              {game.background_image ? (
+                <img
+                  className={"img-card"}
+                  src={cropImage(game.background_image)}
+                  alt={game.name}
+                />
+              ) : (
+                  <img className={"img-card"} src={NoImageUrl} alt={game.name} />
+                )}
+            </div>
+          )}
       </div>
 
       <div className={"game-card-info"} key={game.rating + game.name}>
@@ -75,9 +90,13 @@ const GameItem = ({ game }) => {
         <span>{game.released}</span>
         <Platforms platforms={game.platforms} />
         <div className={"rating-container"}>
-          <span>{game.author}</span>
           <div className={"rating-number"}>
             <span>{game.rating}</span>
+          </div>
+          <div>
+            <button onClick={async (e) => handleWish(e)}>
+              Wish me
+            </button>
           </div>
           <div className={"rating-info"}>
             <StarRatings
