@@ -20,6 +20,7 @@ import AllFilter from "./components/UI/filters/AllFilter/AllFilter";
 import NewsAndTranding from "./pages/NewsAndTranding";
 import Login from "./pages/Login";
 import Register from "./pages/Register"
+import Profile from "./pages/ProfilePage"
 
 function App() {
   const classes = useStyles();
@@ -85,9 +86,9 @@ function App() {
                     <Route path="/login">
                       <Login />
                     </Route>
-                    {/* <Route path="/profile">
+                    <Route path="/profile/:id">
                       <Profile />
-                    </Route> */}
+                    </Route>
                     <Route path={"/all-games"}>
                       <ListViewDetails />
                       <AllFilter />
