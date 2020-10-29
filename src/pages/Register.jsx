@@ -48,20 +48,19 @@ const Register = () => {
 
   const handlePost = (event) => {
     event.preventDefault();
-    passwordHasing(userPassword);
-    // if (validateForm) {
-    //   passwordHasing(userPassword)
-    // }
+    if (validateForm()) {
+      passwordHasing(userPassword)
+    }
     
       
   };
 
   function validateForm() {
-    const emailRegex = /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/;
-    if (userEmail || userPassword || userName) {
+    const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+    if (userEmail && userPassword && userName) {
       if (userEmail.match(emailRegex)) {
         if (userEmail.length > 0 
-          && userPassword.length > 8 
+          && userPassword.length >= 8 
           && userName.length > 3){
           return validateMatchingPasswords();
         }
@@ -73,7 +72,7 @@ const Register = () => {
 }
 
   function validateMatchingPasswords(){
-    return userPassword === passwordConfirmation;
+    return userPassword == passwordConfirmation;
     // return userPassword.match(passwordConfirmation);   
   }
   const handleEmail = (e) => {
