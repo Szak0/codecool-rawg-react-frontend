@@ -16,6 +16,7 @@ const Register = () => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [error, setError] = useState(false);
 
   const passwordHasing = async (plainPassword) => {
     bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -34,14 +35,19 @@ const Register = () => {
       }
     });
   };
-  
+
   const sendRequest = (hash) => {
-    const baseURL = `http://localhost:8080/api/register`;
+    try {
+      const baseURL = `http://localhost:8080/api/register`;
       axios.post(baseURL, {
         userName: userName,
         email: userEmail,
         password: hash
       });
+    } catch (error) {
+      setError(true);
+    }
+    
   }
 
 
@@ -50,9 +56,7 @@ const Register = () => {
     event.preventDefault();
     if (validateForm()) {
       passwordHasing(userPassword)
-    }
-    
-      
+    } 
   };
 
   function validateForm() {
@@ -96,6 +100,7 @@ const Register = () => {
 
   return (
     <div>
+      <h2>{error}</h2>
       <form>
         <FormControl>
           <InputLabel htmlFor="my-input">Email address</InputLabel>
@@ -131,6 +136,7 @@ const Register = () => {
         </FormControl>
         <Input type="submit" value="submit" onClick={handlePost}  />
       </form>
+      {error ? <h1>This username/email already in use!</h1> : null}
     </div>
   );
 };
