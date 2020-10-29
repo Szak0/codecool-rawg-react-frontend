@@ -24,17 +24,17 @@ const DrawerContent = ({ setOpen }) => {
   const history = useHistory();
 
   const routeChangeRegistration = () =>{ 
-    let path = `/api/register`; 
+    let path = `/register`; 
     history.push(path);
   }
 
   const routeChangeLogin = () =>{ 
-    let path = `/api/login`; 
+    let path = `/login`; 
     history.push(path);
   }
 
   const routeChangeMyProfile = () =>{ 
-    let path = `/api/user/1`; 
+    let path = `/profile/1`; 
     history.push(path);
   }
 
