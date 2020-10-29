@@ -136,7 +136,9 @@ const Register = () => {
         </FormControl>
         <Input type="submit" value="submit" onClick={handlePost}  />
       </form>
-      {error ? <h1>This username/email already in use!</h1> : null}
+      <div>
+      {error == true ? <h1>This username/email already in use!</h1> : null}
+      </div>
     </div>
   );
 };

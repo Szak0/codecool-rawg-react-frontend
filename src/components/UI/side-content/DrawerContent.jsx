@@ -159,18 +159,6 @@ const DrawerContent = ({ setOpen }) => {
           <ListItemText primary={"Tops"} />
         </ListItem>
         <DrawerItem
-          text={"Registration"}
-          onclick={routeChangeRegistration}
-        />
-        <DrawerItem
-          text={"Login"}
-          onclick={routeChangeLogin}
-        />
-        <DrawerItem
-          text={"My Profile"}
-          onclick={routeChangeMyProfile}
-        />
-        <DrawerItem
           text={"All time top"}
           onclick={handleAllTimeTop}
           link={"/all-time-top"}
@@ -208,6 +196,21 @@ const DrawerContent = ({ setOpen }) => {
           onclick={handleNextWeek}
           link={"/next-week"}
           component={<NextWeekLogo />}
+        />
+        <ListItem>
+          <ListItemText primary={"Account"} />
+        </ListItem>
+        <DrawerItem
+          text={"Registration"}
+          onclick={routeChangeRegistration}
+        />
+        <DrawerItem
+          text={"Login"}
+          onclick={routeChangeLogin}
+        />
+        <DrawerItem
+          text={"My Profile"}
+          onclick={routeChangeMyProfile}
         />
       </List>
     </div>
