@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Platforms from "../UI/platform-icons/Platforms";
 import NoImageUrl from "../../static/noImagePlaceholder/no_image_to_show_.webp";
 
 const WishListItem = ({ game }) => {
+
     function cropImage(imgUrl) {
         if (imgUrl) {
             let directoryPath = imgUrl.split("/").reverse()[2];
@@ -32,10 +33,9 @@ const WishListItem = ({ game }) => {
             </div>
 
             <div className={"game-card-info"} key={game.rating + game.name}>
+
                 <div>
-                    <Link to={"/game/" + game.id} className={"normalize-link"}>
-                        <h3 className="title-game-item">{game.name}</h3>
-                    </Link>
+                    <h3 className="title-game-item">{game.name}</h3>
                 </div>
                 <span>{game.released}</span>
                 <Platforms platforms={game.platforms} />
@@ -54,6 +54,7 @@ const WishListItem = ({ game }) => {
                         />
                     </div>
                 </div>
+
             </div>
         </div>
     );

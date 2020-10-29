@@ -97,7 +97,6 @@ function App() {
                     </Route>
                     <Route exact path="/game/:id">
                       <GameDetails />
-                      <GamesLikeThis />
                       <LoadingRing />
                     </Route>
                     <Route exact path="/tag/:tag" name="tag-page">
