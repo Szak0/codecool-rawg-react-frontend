@@ -48,6 +48,7 @@ const Register = () => {
 
   const handlePost = (event) => {
     event.preventDefault();
+    passwordHasing(userPassword);
     // if (validateForm) {
     //   passwordHasing(userPassword)
     // }
@@ -129,7 +130,7 @@ const Register = () => {
             onChange={handlePasswordConfirmation}
           />
         </FormControl>
-        <Input type="submit" value="submit" onClick={handlePost} />
+        <Input type="submit" value="submit" onClick={handlePost}  />
       </form>
     </div>
   );
