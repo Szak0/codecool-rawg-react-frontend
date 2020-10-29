@@ -18,6 +18,9 @@ import ListViewDetails from "./components/game-cards/ListViewDetails";
 import GamesLikeThis from "./components/game-detail/GamesLikeThis";
 import AllFilter from "./components/UI/filters/AllFilter/AllFilter";
 import NewsAndTranding from "./pages/NewsAndTranding";
+import Login from "./pages/Login";
+import Register from "./pages/Register"
+import Profile from "./pages/ProfilePage"
 
 function App() {
   const classes = useStyles();
@@ -76,6 +79,15 @@ function App() {
                       <AllFilter />
                       <NewsAndTranding />
                       <LoadingRing />
+                    </Route>
+                    <Route path="/register">
+                      <Register />
+                    </Route>
+                    <Route path="/login">
+                      <Login />
+                    </Route>
+                    <Route path="/profile/:id">
+                      <Profile />
                     </Route>
                     <Route path={"/all-games"}>
                       <ListViewDetails />
