@@ -156,7 +156,6 @@ const Register = () => {
           <Input type="submit" value="submit" onClick={handlePost} />
         </div>
       </form>
-
     </div>
   );
 };
