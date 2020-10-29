@@ -11,17 +11,39 @@ const GameItem = ({ game }) => {
   });
 
 
-  const handleWish = async (e) => {
-    const baseURL = `http://localhost:8080/api/wishlist/add`;
-    const sentData = {
-      gameId: game.id,
-      name: game.name,
-      background_image: game.background_image,
-      released: game.released,
-      rating: game.rating,
-    }
-    console.log(sentData, "DATA");
-    await axios.post(baseURL, sentData);
+  const handleWish = (e) => {
+    // const baseURL = `http://localhost:8080/api/wishlist/add`;
+    // const sentData = {
+    //   gameId: game.id,
+    //   name: game.name,
+    //   background_image: game.background_image,
+    //   released: game.released,
+    //   rating: game.rating,
+    // }
+    // console.log(sentData, "DATA");
+    // axios.post(baseURL, sentData);
+
+    var bodyFormData = new FormData();
+    bodyFormData.append('gameId', game.id)
+    bodyFormData.append('background_image', game.background_image)
+    bodyFormData.append('name', game.name)
+    bodyFormData.append('rating', game.rating)
+    bodyFormData.append('released', game.released)
+    axios.post(`http://localhost:8080/api/wishlist/add`, bodyFormData).then(res => {
+      res.json()
+      console.log("Ok");
+    })
+      .catch(err => {
+        if (err.response) {
+          // client received an error response (5xx, 4xx)
+          console.log("error");
+        } else if (err.request) {
+          // client never received a response, or request never left
+        } else {
+          // anything else
+        }
+      })
+
   }
 
 
