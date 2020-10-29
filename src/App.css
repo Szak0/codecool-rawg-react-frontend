@@ -263,7 +263,9 @@ video {
   margin-bottom: 1rem;
   width: 50%;
 }
-
+.forms {
+  margin-bottom: 0.55rem;
+}
 .about-game {
   border-style: none;
   border-radius: 1rem;
