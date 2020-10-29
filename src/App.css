@@ -270,11 +270,12 @@ video {
   border-style: none;
   border-radius: 1rem;
   padding: 0.2rem 1rem 1rem 1rem;
-  max-height: 150px;
   background-color: #202020;
+  margin: 1rem;
+  
 }
-.discription {
-  overflow: hidden;
+.divider{
+  margin: 1rem
 }
 /* width */
 ::-webkit-scrollbar {
