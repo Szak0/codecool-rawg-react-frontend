@@ -9,7 +9,7 @@ import NextWeekLogo from "../logos/NextWeekLogo";
 import BestOfTheYearLogo from "../logos/BestOfTheYearLogo";
 import { GamesContext } from "../../contexts/GamesContext";
 import DrawerItem from "./DrawerItem";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import StarLogo from "../logos/StarLogo";
 import {
   today,
@@ -20,6 +20,26 @@ import {
 } from "../../date-time/DrawerTimeSetting";
 
 const DrawerContent = ({ setOpen }) => {
+
+  const history = useHistory();
+
+  const routeChangeRegistration = () =>{ 
+    let path = `/api/register`; 
+    history.push(path);
+  }
+
+  const routeChangeLogin = () =>{ 
+    let path = `/api/login`; 
+    history.push(path);
+  }
+
+  const routeChangeMyProfile = () =>{ 
+    let path = `/api/user/1`; 
+    history.push(path);
+  }
+
+
+
   const [
     data,
     games,
@@ -119,6 +139,8 @@ const DrawerContent = ({ setOpen }) => {
     setOpen(false);
   };
 
+
+
   return (
     <div>
       <List>
@@ -132,9 +154,22 @@ const DrawerContent = ({ setOpen }) => {
             <ListItemText primary={"All Games"} />
           </ListItem>
         </Link>
+        
         <ListItem>
           <ListItemText primary={"Tops"} />
         </ListItem>
+        <DrawerItem
+          text={"Registration"}
+          onclick={routeChangeRegistration}
+        />
+        <DrawerItem
+          text={"Login"}
+          onclick={routeChangeLogin}
+        />
+        <DrawerItem
+          text={"My Profile"}
+          onclick={routeChangeMyProfile}
+        />
         <DrawerItem
           text={"All time top"}
           onclick={handleAllTimeTop}
