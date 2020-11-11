@@ -17,6 +17,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchBar from "../filters/search-bar/SearchBar";
 import { GamesContext } from "../../contexts/GamesContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const NavBar = ({
   open,
@@ -36,7 +37,7 @@ const NavBar = ({
     isError,
     setPathSuffix,
   ] = useContext(GamesContext);
-
+  const [userInfo, setUserInfo] = useContext(AuthContext);
   const menuId = "primary-search-account-menu";
 
   return (
@@ -86,6 +87,7 @@ const NavBar = ({
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
+              <div>{userInfo.userEmail}</div>
               <AccountCircle />
             </IconButton>
           </div>
