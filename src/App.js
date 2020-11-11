@@ -19,8 +19,9 @@ import GamesLikeThis from "./components/game-detail/GamesLikeThis";
 import AllFilter from "./components/UI/filters/AllFilter/AllFilter";
 import NewsAndTranding from "./pages/NewsAndTranding";
 import Login from "./pages/Login";
-import Register from "./pages/Register"
-import Profile from "./pages/ProfilePage"
+import Register from "./pages/Register";
+import Profile from "./pages/ProfilePage";
+import { AuthProvider } from "./components/contexts/AuthContext";
 
 function App() {
   const classes = useStyles();
@@ -56,123 +57,125 @@ function App() {
         <ThemeProvider theme={darkTheme}>
           <Paper className={classes.paperBack}>
             <div className="app_">
-              <GamesProvider>
-                <CssBaseline />
-                <NavBar
-                  classes={classes}
-                  handleDrawerOpen={handleDrawerOpen}
-                  handleProfileMenuOpen={handleProfileMenuOpen}
-                  open={open}
-                />
-                <main
-                  className={clsx(classes.content, {
-                    [classes.contentShift]: open,
-                  })}
-                >
-                  <Switch>
-                    <Route path={"/"} exact={true}>
-                      <div className={"page-title"}>
-                        <h1>News and tranding</h1>
-                        <span>Based on player counts and release date</span>
-                      </div>
-                      <ListViewDetails />
-                      <AllFilter />
-                      <NewsAndTranding />
-                      <LoadingRing />
-                    </Route>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route path="/login">
-                      <Login />
-                    </Route>
-                    <Route path="/profile/:id">
-                      <Profile />
-                    </Route>
-                    <Route path={"/all-games"}>
-                      <ListViewDetails />
-                      <AllFilter />
-                      <GamesList />
-                      <LoadingRing />
-                    </Route>
-                    <Route exact path="/game/:id">
-                      <GameDetails />
-                      <LoadingRing />
-                    </Route>
-                    <Route exact path="/tag/:tag" name="tag-page">
-                      <ListViewDetails />
-                      <AllFilter />
-                      <GameListByTag />
-                      <LoadingRing />
-                    </Route>
-                    <Route exact path="/all-time-top">
-                      <div className={"page-title"}>
-                        <h1>All time top</h1>
-                      </div>
-                      <ListViewDetails />
-                      <AllFilter />
-                      <GamesList />
-                      <LoadingRing />
-                    </Route>
-                    <Route exact path="/best-of-the-year">
-                      <div className={"page-title"}>
-                        <h1>Best of the year</h1>
-                      </div>
-                      <ListViewDetails />
-                      <AllFilter />
-                      <GamesList />
-                      <LoadingRing />
-                    </Route>
-                    <Route exact path="/popular-in-2019">
-                      <div className={"page-title"}>
-                        <h1>Popular in 2019</h1>
-                      </div>
-                      <ListViewDetails />
-                      <AllFilter />
-                      <GamesList />
-                      <LoadingRing />
-                    </Route>
-                    <Route exact path="/last-30-days">
-                      <div className={"page-title"}>
-                        <h1>Released: Last 30 days</h1>
-                      </div>
-                      <ListViewDetails />
-                      <AllFilter />
-                      <GamesList />
-                      <LoadingRing />
-                    </Route>
-                    <Route exact path="/this-week">
-                      <div className={"page-title"}>
-                        <h1>Released: This week</h1>
-                      </div>
-                      <ListViewDetails />
-                      <AllFilter />
-                      <GamesList />
-                      <LoadingRing />
-                    </Route>
-                    <Route exact path="/next-week">
-                      <div className={"page-title"}>
-                        <h1>Release: Next week</h1>
-                      </div>
-                      <ListViewDetails />
-                      <AllFilter />
-                      <GamesList />
-                      <LoadingRing />
-                    </Route>
-                  </Switch>
-                </main>
-                <LeftSideDrawer
-                  classes={classes}
-                  handleDrawerClose={handleDrawerClose}
-                  theme={theme}
-                  open={open}
-                  handleMenuClose={handleMenuClose}
-                  handleMobileMenuClose={handleMobileMenuClose}
-                  anchorEl={anchorEl}
-                  mobileMoreAnchorEl={mobileMoreAnchorEl}
-                  setOpen={setOpen}
-                />
-              </GamesProvider>
+              <AuthProvider>
+                <GamesProvider>
+                  <CssBaseline />
+                  <NavBar
+                    classes={classes}
+                    handleDrawerOpen={handleDrawerOpen}
+                    handleProfileMenuOpen={handleProfileMenuOpen}
+                    open={open}
+                  />
+                  <main
+                    className={clsx(classes.content, {
+                      [classes.contentShift]: open,
+                    })}
+                  >
+                    <Switch>
+                      <Route path={"/"} exact={true}>
+                        <div className={"page-title"}>
+                          <h1>News and tranding</h1>
+                          <span>Based on player counts and release date</span>
+                        </div>
+                        <ListViewDetails />
+                        <AllFilter />
+                        <NewsAndTranding />
+                        <LoadingRing />
+                      </Route>
+                      <Route path="/register">
+                        <Register />
+                      </Route>
+                      <Route path="/login">
+                        <Login />
+                      </Route>
+                      <Route path="/profile/:id">
+                        <Profile />
+                      </Route>
+                      <Route path={"/all-games"}>
+                        <ListViewDetails />
+                        <AllFilter />
+                        <GamesList />
+                        <LoadingRing />
+                      </Route>
+                      <Route exact path="/game/:id">
+                        <GameDetails />
+                        <LoadingRing />
+                      </Route>
+                      <Route exact path="/tag/:tag" name="tag-page">
+                        <ListViewDetails />
+                        <AllFilter />
+                        <GameListByTag />
+                        <LoadingRing />
+                      </Route>
+                      <Route exact path="/all-time-top">
+                        <div className={"page-title"}>
+                          <h1>All time top</h1>
+                        </div>
+                        <ListViewDetails />
+                        <AllFilter />
+                        <GamesList />
+                        <LoadingRing />
+                      </Route>
+                      <Route exact path="/best-of-the-year">
+                        <div className={"page-title"}>
+                          <h1>Best of the year</h1>
+                        </div>
+                        <ListViewDetails />
+                        <AllFilter />
+                        <GamesList />
+                        <LoadingRing />
+                      </Route>
+                      <Route exact path="/popular-in-2019">
+                        <div className={"page-title"}>
+                          <h1>Popular in 2019</h1>
+                        </div>
+                        <ListViewDetails />
+                        <AllFilter />
+                        <GamesList />
+                        <LoadingRing />
+                      </Route>
+                      <Route exact path="/last-30-days">
+                        <div className={"page-title"}>
+                          <h1>Released: Last 30 days</h1>
+                        </div>
+                        <ListViewDetails />
+                        <AllFilter />
+                        <GamesList />
+                        <LoadingRing />
+                      </Route>
+                      <Route exact path="/this-week">
+                        <div className={"page-title"}>
+                          <h1>Released: This week</h1>
+                        </div>
+                        <ListViewDetails />
+                        <AllFilter />
+                        <GamesList />
+                        <LoadingRing />
+                      </Route>
+                      <Route exact path="/next-week">
+                        <div className={"page-title"}>
+                          <h1>Release: Next week</h1>
+                        </div>
+                        <ListViewDetails />
+                        <AllFilter />
+                        <GamesList />
+                        <LoadingRing />
+                      </Route>
+                    </Switch>
+                  </main>
+                  <LeftSideDrawer
+                    classes={classes}
+                    handleDrawerClose={handleDrawerClose}
+                    theme={theme}
+                    open={open}
+                    handleMenuClose={handleMenuClose}
+                    handleMobileMenuClose={handleMobileMenuClose}
+                    anchorEl={anchorEl}
+                    mobileMoreAnchorEl={mobileMoreAnchorEl}
+                    setOpen={setOpen}
+                  />
+                </GamesProvider>
+              </AuthProvider>
             </div>
           </Paper>
         </ThemeProvider>
