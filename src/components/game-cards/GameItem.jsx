@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import Platforms from "../UI/platform-icons/Platforms";
 import NoImageUrl from "../../static/noImagePlaceholder/no_image_to_show_.webp";
 import axios from "axios";
+import { Rating } from '@material-ui/lab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 const GameItem = ({ game }) => {
   const [videInfo, seVideoInfo] = useState({
@@ -112,23 +115,30 @@ const GameItem = ({ game }) => {
         <span>{game.released}</span>
         <Platforms platforms={game.platforms} />
         <div className={"rating-container"}>
-          <div className={"rating-number"}>
-            <span>{game.rating}</span>
-          </div>
           <div>
             <button onClick={async (e) => handleWish(e)}>
               Wish me
             </button>
           </div>
           <div className={"rating-info"}>
-            <StarRatings
+            <Box component="fieldset" mb={3} borderColor="transparent">
+              <Typography component="legend">Rating: {game.rating}</Typography>
+              <Rating
+                name="simple-controlled"
+                value={game.rating}
+                onChange={(event, newValue) => {
+
+                }}
+              />
+            </Box>
+            {/* <StarRatings
               rating={game.rating}
               starRatedColor="white"
               starEmptyColor="black"
               numberOfStars={5}
               name="game-rating"
               starDimension="20px"
-            />
+            /> */}
           </div>
         </div>
       </div>

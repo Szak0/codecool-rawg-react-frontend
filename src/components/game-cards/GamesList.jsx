@@ -33,28 +33,30 @@ const GamesList = () => {
     [filters, isLoading, setFilters]
   );
   return (
-    <div className={"flex-container"}>
-      <div className={"game-list-container"}>
-        <section className="games-container">
-          {games.map((game, index) => {
-            if (games.length === index + 1) {
-              return (
-                <div
-                  key={game.name + game.id + "-a" + index}
-                  ref={lastGameCardRef}
-                >
-                  <GameItem game={game} />
-                </div>
-              );
-            } else
-              return (
-                <GameItem
-                  game={game}
-                  key={game.name + game.id + "-b" + index}
-                />
-              );
-          })}
-        </section>
+    <div>
+      <div className={"flex-container"}>
+        <div className={"game-list-container"}>
+          <section className="games-container">
+            {games.map((game, index) => {
+              if (games.length === index + 1) {
+                return (
+                  <div
+                    key={game.name + game.id + "-a" + index}
+                    ref={lastGameCardRef}
+                  >
+                    <GameItem game={game} />
+                  </div>
+                );
+              } else
+                return (
+                  <GameItem
+                    game={game}
+                    key={game.name + game.id + "-b" + index}
+                  />
+                );
+            })}
+          </section>
+        </div>
       </div>
     </div>
   );

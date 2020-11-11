@@ -88,7 +88,7 @@ function App() {
                       <Route path="/login">
                         <Login />
                       </Route>
-                      <Route path="/profile/:id">
+                      <Route path="/profile">
                         <Profile />
                       </Route>
                       <Route path={"/all-games"}>
