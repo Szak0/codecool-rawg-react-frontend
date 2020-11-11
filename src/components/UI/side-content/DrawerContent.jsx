@@ -20,25 +20,22 @@ import {
 } from "../../date-time/DrawerTimeSetting";
 
 const DrawerContent = ({ setOpen }) => {
-
   const history = useHistory();
 
-  const routeChangeRegistration = () =>{ 
-    let path = `/register`; 
+  const routeChangeRegistration = () => {
+    let path = `/register`;
     history.push(path);
-  }
+  };
 
-  const routeChangeLogin = () =>{ 
-    let path = `/login`; 
+  const routeChangeLogin = () => {
+    let path = `/login`;
     history.push(path);
-  }
+  };
 
-  const routeChangeMyProfile = () =>{ 
-    let path = `/profile/1`; 
+  const routeChangeMyProfile = () => {
+    let path = `/profile/1`;
     history.push(path);
-  }
-
-
+  };
 
   const [
     data,
@@ -50,6 +47,14 @@ const DrawerContent = ({ setOpen }) => {
     isError,
     setPathSuffix,
   ] = useContext(GamesContext);
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    let path = `/`;
+    history.push(path);
+    window.location.reload();
+  };
+
   const handleAllTimeTop = () => {
     setFilters({
       page: 1,
@@ -139,8 +144,6 @@ const DrawerContent = ({ setOpen }) => {
     setOpen(false);
   };
 
-
-
   return (
     <div>
       <List>
@@ -154,7 +157,7 @@ const DrawerContent = ({ setOpen }) => {
             <ListItemText primary={"All Games"} />
           </ListItem>
         </Link>
-        
+
         <ListItem>
           <ListItemText primary={"Tops"} />
         </ListItem>
@@ -200,18 +203,15 @@ const DrawerContent = ({ setOpen }) => {
         <ListItem>
           <ListItemText primary={"Account"} />
         </ListItem>
-        <DrawerItem
-          text={"Registration"}
-          onclick={routeChangeRegistration}
-        />
-        <DrawerItem
-          text={"Login"}
-          onclick={routeChangeLogin}
-        />
-        <DrawerItem
-          text={"My Profile"}
-          onclick={routeChangeMyProfile}
-        />
+        <DrawerItem text={"Registration"} onclick={routeChangeRegistration} />
+
+        {localStorage.getItem("token") ? (
+          <DrawerItem text={"Log out"} onclick={handleLogOut} />
+        ) : (
+          <DrawerItem text={"Login"} onclick={routeChangeLogin} />
+        )}
+
+        <DrawerItem text={"My Profile"} onclick={routeChangeMyProfile} />
       </List>
     </div>
   );
