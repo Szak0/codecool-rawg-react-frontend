@@ -78,7 +78,9 @@ const NavBar = ({
           >
             <IconButton>
               <AccountCircle />
-              <div>{userInfo.userEmail}</div>
+              <div>
+                {userInfo.userEmail == "undefined" ? null : userInfo.userEmail}
+              </div>
             </IconButton>
           </div>
         </Toolbar>
