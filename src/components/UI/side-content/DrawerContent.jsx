@@ -33,7 +33,7 @@ const DrawerContent = ({ setOpen }) => {
   };
 
   const routeChangeMyProfile = () => {
-    let path = `/profile/1`;
+    let path = `/profile`;
     history.push(path);
   };
 
@@ -203,15 +203,21 @@ const DrawerContent = ({ setOpen }) => {
         <ListItem>
           <ListItemText primary={"Account"} />
         </ListItem>
-        <DrawerItem text={"Registration"} onclick={routeChangeRegistration} />
 
         {localStorage.getItem("token") ? (
-          <DrawerItem text={"Log out"} onclick={handleLogOut} />
+          <div>
+            <DrawerItem text={"My Profile"} onclick={routeChangeMyProfile} />
+            <DrawerItem text={"Log out"} onclick={handleLogOut} />
+          </div>
         ) : (
-          <DrawerItem text={"Login"} onclick={routeChangeLogin} />
+          <div>
+            <DrawerItem text={"Login"} onclick={routeChangeLogin} />
+            <DrawerItem
+              text={"Registration"}
+              onclick={routeChangeRegistration}
+            />
+          </div>
         )}
-
-        <DrawerItem text={"My Profile"} onclick={routeChangeMyProfile} />
       </List>
     </div>
   );
