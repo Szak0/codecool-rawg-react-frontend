@@ -12,23 +12,42 @@ import { AuthContext } from "../components/contexts/AuthContext";
 const Login = () => {
   const history = useHistory();
   const [userEmail, setUserEmail] = useState("");
-  //   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userInfo, setUserInfo] = useContext(AuthContext);
+  const [error, setError] = useState(false);
+  const [authServerDown, setAuthServerDown] = useState(false);
 
   const handlePost = async (event) => {
     event.preventDefault();
+
     const baseURL = `http://localhost:5000/auth/login`;
-    const res = await axios.post(baseURL, {
-      email: userEmail,
-      password: userPassword,
-    });
-    localStorage.setItem("token", res.data.token);
-    localStorage.setItem("roles", res.data.roles);
-    localStorage.setItem("userEmail", res.data.userEmail);
-    let path = `/`;
-    history.push(path);
-    window.location.reload();
+    axios
+      .post(
+        baseURL,
+        {
+          email: userEmail,
+          password: userPassword,
+        },
+        { headers: {} }
+      )
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("roles", res.data.roles);
+        localStorage.setItem("userEmail", res.data.userEmail);
+        let path = `/`;
+        history.push(path);
+        window.location.reload();
+        console.log(res);
+      })
+      .catch((err) => {
+        if (err.response) {
+          setError(true);
+        } else if (err.request) {
+          setAuthServerDown(true);
+        } else {
+          // anything else
+        }
+      });
   };
 
   function validateForm() {
@@ -51,6 +70,7 @@ const Login = () => {
   };
   return (
     <div>
+      {error ? <h1>Username/email is incorrect!</h1> : <h1>Sign in!</h1>}
       <form>
         <FormControl>
           <InputLabel htmlFor="my-input">Email address</InputLabel>
