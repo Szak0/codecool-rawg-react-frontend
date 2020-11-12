@@ -76,19 +76,9 @@ const NavBar = ({
             className={classes.sectionDesktop}
             style={{ marginLeft: "auto" }}
           >
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <div>{userInfo.userEmail}</div>
+            <IconButton>
               <AccountCircle />
+              <div>{userInfo.userEmail}</div>
             </IconButton>
           </div>
         </Toolbar>
