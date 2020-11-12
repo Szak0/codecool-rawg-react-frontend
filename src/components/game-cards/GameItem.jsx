@@ -4,39 +4,35 @@ import { Link } from "react-router-dom";
 import Platforms from "../UI/platform-icons/Platforms";
 import NoImageUrl from "../../static/noImagePlaceholder/no_image_to_show_.webp";
 import axios from "axios";
-import { Rating } from '@material-ui/lab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { Rating } from "@material-ui/lab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 const GameItem = ({ game }) => {
   const [videInfo, seVideoInfo] = useState({
     vidRef: useRef(null),
   });
 
-
   const handleWish = (e) => {
-    // const baseURL = `http://localhost:8080/api/wishlist/add`;
-    // const sentData = {
-    //   gameId: game.id,
-    //   name: game.name,
-    //   background_image: game.background_image,
-    //   released: game.released,
-    //   rating: game.rating,
-    // }
-    // console.log(sentData, "DATA");
-    // axios.post(baseURL, sentData);
-
     var bodyFormData = new FormData();
-    bodyFormData.append('gameId', game.id)
-    bodyFormData.append('background_image', game.background_image)
-    bodyFormData.append('name', game.name)
-    bodyFormData.append('rating', game.rating)
-    bodyFormData.append('released', game.released)
-    axios.post(`http://localhost:8080/api/wishlist/add`, bodyFormData).then(res => {
-      res.json()
-      console.log("Ok");
-    })
-      .catch(err => {
+    const email = localStorage.getItem("userEmail");
+    bodyFormData.append("gameId", game.id);
+    bodyFormData.append("background_image", game.background_image);
+    bodyFormData.append("name", game.name);
+    bodyFormData.append("rating", game.rating);
+    bodyFormData.append("released", game.released);
+    bodyFormData.append("userEmail", email);
+
+    const token = localStorage.getItem("token");
+
+    const url = `http://localhost:5000/api/wishlist/add`;
+    axios
+      .post(url, bodyFormData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .catch((err) => {
         if (err.response) {
           // client received an error response (5xx, 4xx)
           console.log("error");
@@ -45,10 +41,8 @@ const GameItem = ({ game }) => {
         } else {
           // anything else
         }
-      })
-
-  }
-
+      });
+  };
 
   // const handlePlayVideo = () => {
   //   videInfo.vidRef.current.play();
@@ -92,18 +86,18 @@ const GameItem = ({ game }) => {
             </video> */}
           </div>
         ) : (
-            <div>
-              {game.background_image ? (
-                <img
-                  className={"img-card"}
-                  src={cropImage(game.background_image)}
-                  alt={game.name}
-                />
-              ) : (
-                  <img className={"img-card"} src={NoImageUrl} alt={game.name} />
-                )}
-            </div>
-          )}
+          <div>
+            {game.background_image ? (
+              <img
+                className={"img-card"}
+                src={cropImage(game.background_image)}
+                alt={game.name}
+              />
+            ) : (
+              <img className={"img-card"} src={NoImageUrl} alt={game.name} />
+            )}
+          </div>
+        )}
       </div>
 
       <div className={"game-card-info"} key={game.rating + game.name}>
@@ -116,9 +110,7 @@ const GameItem = ({ game }) => {
         <Platforms platforms={game.platforms} />
         <div className={"rating-container"}>
           <div>
-            <button onClick={async (e) => handleWish(e)}>
-              Wish me
-            </button>
+            <button onClick={async (e) => handleWish(e)}>Wish me</button>
           </div>
           <div className={"rating-info"}>
             <Box component="fieldset" mb={3} borderColor="transparent">
@@ -126,9 +118,7 @@ const GameItem = ({ game }) => {
               <Rating
                 name="simple-controlled"
                 value={game.rating}
-                onChange={(event, newValue) => {
-
-                }}
+                onChange={(event, newValue) => {}}
               />
             </Box>
             {/* <StarRatings
