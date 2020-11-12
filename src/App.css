@@ -149,12 +149,11 @@ body {
 
 .game-card {
   max-width: 100%;
-  border-width: 1px;
-  border-color: black;
+
+  
   border-radius: 25px;
   margin: 1rem;
   overflow: hidden;
-  background-color: #202020;
   -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.07);
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.07);
   overflow: hidden;

@@ -3,6 +3,9 @@ import StarRatings from "react-star-ratings";
 import { Link, useHistory } from "react-router-dom";
 import Platforms from "../UI/platform-icons/Platforms";
 import NoImageUrl from "../../static/noImagePlaceholder/no_image_to_show_.webp";
+import { Rating } from '@material-ui/lab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 const WishListItem = ({ game }) => {
 
@@ -40,18 +43,26 @@ const WishListItem = ({ game }) => {
                 <span>{game.released}</span>
                 <Platforms platforms={game.platforms} />
                 <div className={"rating-container"}>
-                    <div className={"rating-number"}>
-                        <span>{game.rating}</span>
-                    </div>
+
                     <div className={"rating-info"}>
-                        <StarRatings
+                        <Box component="fieldset" mb={3} borderColor="transparent">
+                            <Typography component="legend">Rating: {game.rating}</Typography>
+                            <Rating
+                                name="simple-controlled"
+                                value={game.rating}
+                                onChange={(event, newValue) => {
+
+                                }}
+                            />
+                        </Box>
+                        {/* <StarRatings
                             rating={game.rating}
                             starRatedColor="white"
                             starEmptyColor="black"
                             numberOfStars={5}
                             name="game-rating"
                             starDimension="20px"
-                        />
+                        />*/}
                     </div>
                 </div>
 

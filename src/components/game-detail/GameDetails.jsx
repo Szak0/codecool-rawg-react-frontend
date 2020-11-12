@@ -5,7 +5,7 @@ import Platforms from "../UI/platform-icons/Platforms";
 import { Divider } from "@material-ui/core";
 import { GamesContext } from "../contexts/GamesContext";
 import { useStyles } from "../../Styles";
-import GamesLikeThis from "./GamesLikeThis"
+import GamesLikeThis from "./GamesLikeThis";
 
 const GameDetails = () => {
   const classes = useStyles();
@@ -23,7 +23,7 @@ const GameDetails = () => {
   const [game, setGame] = useState([]);
   const [tags, setTags] = useState([]);
   const [genres, setGenres] = useState([]);
-  const [similarGames, setSimilarGames] = useState([])
+  const [similarGames, setSimilarGames] = useState([]);
   let id = window.location.href.split("/").reverse()[0];
   const setTagPage = (tag) => {
     setGames([]);
@@ -32,12 +32,14 @@ const GameDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       const request = await axios(`https://api.rawg.io/api/games/${id}`);
-      const similarGamesRequest = await axios(`https://api.rawg.io/api/games/${id}/suggested`);
+      const similarGamesRequest = await axios(
+        `https://api.rawg.io/api/games/${id}/suggested?page_size=16`
+      );
       console.log(similarGamesRequest.data.results);
-      setSimilarGames(similarGamesRequest.data.results)
+      setSimilarGames(similarGamesRequest.data.results);
       setGame(request.data);
       console.log(request.data);
-      setPathSuffix("/games?")
+      setPathSuffix("/games?");
       setTags(request.data.tags);
       setGenres(request.data.genres);
     };
@@ -86,7 +88,7 @@ const GameDetails = () => {
               ></div>
             </div>
             <Divider />
-            {game.clip ?
+            {game.clip ? (
               <div className={"divider"}>
                 <video
                   onClick={(e) => e.target.pause()}
@@ -99,8 +101,8 @@ const GameDetails = () => {
                   <source src={game.clip.clips.full} type="video/mp4"></source>
                   <source src="Video.ogg" type="video/ogg"></source>
                 </video>
-              </div> : null}
-
+              </div>
+            ) : null}
 
             <div className="tagsInDetails">
               <h3>Tags</h3>
@@ -117,11 +119,9 @@ const GameDetails = () => {
           </div>
           <Divider />
         </div>
-
-
       </div>
+      <h1>Visually similar games:</h1>
       <div>
-
         <GamesLikeThis games={similarGames} />
       </div>
     </div>
