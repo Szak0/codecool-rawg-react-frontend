@@ -9,6 +9,7 @@ const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     const fetchData = async () => {
       const request = await axios.get(`http://localhost:5000/api/me`, {
@@ -26,19 +27,11 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const client = axios.create(
-          {
-            baseURL: `http://localhost:5000/api/wishlist`,
-            timeout: 20000,
+        const request = await axios.get(`http://localhost:5000/api/wishlist`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const request = await client.get();
-        console.log(request.data);
+        });
 
         if (request.data) {
           setGames((game) => [...game, ...request.data]);
@@ -72,11 +65,16 @@ const ProfilePage = () => {
           <h2># {data.id}</h2>
           <h1>{data.userName}</h1>
           <span>{data.email}</span>
-          <div>{getRegDate(data.registrationDate)}</div>
+          <div>Registration date: {getRegDate(data.registrationDate)}</div>
         </div>
-
-        <h3>{getUpperCase(data.userName)}'s Wishlist</h3>
-        <WishListContainer games={games} />
+        {games.length != 0 ? (
+          <div>
+            <h3>{getUpperCase(data.userName)}'s Wishlist</h3>
+            <WishListContainer games={games} />{" "}
+          </div>
+        ) : (
+          <div>Add some game to your wishlist!</div>
+        )}
       </div>
     </div>
   );
