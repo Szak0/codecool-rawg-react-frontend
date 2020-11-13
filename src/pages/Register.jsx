@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { FormControl, Input, InputLabel } from "@material-ui/core";
+import { Link, useHistory } from "react-router-dom";
 
 const Register = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -9,6 +10,8 @@ const Register = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [error, setError] = useState(false);
   const [authServerDown, setAuthServerDown] = useState(false);
+  const [PasswordNotMatch, setPasswordNotMatch] = useState(false);
+  const history = useHistory();
 
   const sendRequest = (password) => {
     axios
@@ -19,6 +22,8 @@ const Register = () => {
       })
       .then((res) => {
         console.log("Ok");
+        let path = `/login`;
+        history.push(path);
       })
       .catch((err) => {
         if (err.response) {
@@ -36,10 +41,10 @@ const Register = () => {
 
   const handlePost = (event) => {
     event.preventDefault();
-    sendRequest(userPassword);
-    // if (validateForm()) {
-    //   sendRequest(userPassword);
-    // }
+    //sendRequest(userPassword);
+    if (validateForm()) {
+      sendRequest(userPassword);
+    }
   };
 
   function validateForm() {
@@ -82,17 +87,25 @@ const Register = () => {
   const handlePasswordConfirmation = (e) => {
     e.preventDefault();
     setError(false);
-    setPasswordConfirmation(e.target.value);
+    if (e.target.value != userPassword) {
+      setPasswordNotMatch(true);
+    } else {
+      setPasswordNotMatch(false);
+      setPasswordConfirmation(e.target.value);
+    }
   };
 
   return (
     <div className={"registration-form"}>
       <form>
         <div>
+          {PasswordNotMatch ? (
+            <h1>Your password and confirmation password do not match.</h1>
+          ) : null}
           {error ? (
             <h1>This username/email already in use!</h1>
           ) : (
-            <h1>Come to join us!</h1>
+            <h1>Sign up!</h1>
           )}
         </div>
         <div className={"forms"}>
@@ -122,6 +135,7 @@ const Register = () => {
               id="password"
               aria-describedby="my-helper-text"
               onChange={handlePassword}
+              type="password"
             />
           </FormControl>
         </div>
@@ -132,6 +146,7 @@ const Register = () => {
               id="password-conf"
               aria-describedby="my-helper-text"
               onChange={handlePasswordConfirmation}
+              type="password"
             />
           </FormControl>
         </div>

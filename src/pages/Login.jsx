@@ -72,15 +72,16 @@ const Login = () => {
     <div>
       {error ? <h1>Username/email is incorrect!</h1> : <h1>Sign in!</h1>}
       <form>
-        <FormControl>
-          <InputLabel htmlFor="my-input">Email address</InputLabel>
-          <Input
-            id="email"
-            aria-describedby="my-helper-text"
-            onChange={handleEmail}
-          />
-        </FormControl>
-        {/* <FormControl>
+        <div className={"forms"}>
+          <FormControl>
+            <InputLabel htmlFor="my-input">Email address</InputLabel>
+            <Input
+              id="email"
+              aria-describedby="my-helper-text"
+              onChange={handleEmail}
+            />
+          </FormControl>
+          {/* <FormControl>
           <InputLabel htmlFor="my-input">User name</InputLabel>
           <Input
             id="user-name"
@@ -88,20 +89,26 @@ const Login = () => {
             onChange={handleUserName}
           />
         </FormControl> */}
-        <FormControl>
-          <InputLabel htmlFor="my-input">Password</InputLabel>
+        </div>
+        <div className={"forms"}>
+          <FormControl>
+            <InputLabel htmlFor="my-input">Password</InputLabel>
+            <Input
+              id="password"
+              aria-describedby="my-helper-text"
+              onChange={handlePassword}
+              type="password"
+            />
+          </FormControl>
+        </div>
+        <div className={"forms"}>
           <Input
-            id="password"
-            aria-describedby="my-helper-text"
-            onChange={handlePassword}
+            type="submit"
+            value="submit"
+            onClick={handlePost}
+            disabled={!validateForm()}
           />
-        </FormControl>
-        <Input
-          type="submit"
-          value="submit"
-          onClick={handlePost}
-          disabled={!validateForm()}
-        />
+        </div>
       </form>
     </div>
   );
