@@ -1,14 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import StarRatings from "react-star-ratings";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Platforms from "../UI/platform-icons/Platforms";
 import NoImageUrl from "../../static/noImagePlaceholder/no_image_to_show_.webp";
 import axios from "axios";
 import { Rating } from "@material-ui/lab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import { AuthContext } from "../contexts/AuthContext";
 
 const GameItem = ({ game }) => {
+  const [userInfo] = useContext(AuthContext);
+
   const [videInfo, seVideoInfo] = useState({
     vidRef: useRef(null),
   });
@@ -24,7 +28,6 @@ const GameItem = ({ game }) => {
     bodyFormData.append("userEmail", email);
 
     const token = localStorage.getItem("token");
-
     const url = `http://localhost:5000/api/wishlist/add`;
     axios
       .post(url, bodyFormData, {
@@ -42,11 +45,10 @@ const GameItem = ({ game }) => {
           // anything else
         }
       });
+    e.target.innerHTML = "";
+    console.log(e.target);
   };
 
-  // const handlePlayVideo = () => {
-  //   videInfo.vidRef.current.play();
-  // };
   function cropImage(imgUrl) {
     if (imgUrl) {
       let directoryPath = imgUrl.split("/").reverse()[2];
@@ -109,9 +111,17 @@ const GameItem = ({ game }) => {
         <span>{game.released}</span>
         <Platforms platforms={game.platforms} />
         <div className={"rating-container"}>
-          <div>
-            <button onClick={async (e) => handleWish(e)}>Wish me</button>
-          </div>
+          {userInfo.userEmail == "undefined" ||
+          userInfo.userEmail == null ? null : (
+            <div style={{ float: "right" }}>
+              <Button onClick={async (e) => handleWish(e)} color="secondary">
+                Add to wishes
+              </Button>
+            </div>
+          )}
+
+          {/* <button onClick={async (e) => handleWish(e)}>Favorite</button> */}
+
           <div className={"rating-info"}>
             <Box component="fieldset" mb={3} borderColor="transparent">
               <Typography component="legend">Rating: {game.rating}</Typography>

@@ -11,6 +11,8 @@ import { GamesContext } from "../../contexts/GamesContext";
 import DrawerItem from "./DrawerItem";
 import { Link, useHistory } from "react-router-dom";
 import StarLogo from "../logos/StarLogo";
+import { AuthContext } from "../../contexts/AuthContext";
+
 import {
   today,
   nextWeekDate,
@@ -20,6 +22,8 @@ import {
 } from "../../date-time/DrawerTimeSetting";
 
 const DrawerContent = ({ setOpen }) => {
+  const [userInfo, setUserInfo] = useContext(AuthContext);
+
   const history = useHistory();
 
   const routeChangeRegistration = () => {
@@ -50,6 +54,7 @@ const DrawerContent = ({ setOpen }) => {
 
   const handleLogOut = () => {
     localStorage.clear();
+    setUserInfo(null);
     let path = `/`;
     history.push(path);
     window.location.reload();
