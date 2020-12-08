@@ -18,19 +18,20 @@ const GameItem = ({ game }) => {
   });
 
   const handleWish = (e) => {
-    var bodyFormData = new FormData();
     const email = localStorage.getItem("userEmail");
-    bodyFormData.append("gameId", game.id);
-    bodyFormData.append("background_image", game.background_image);
-    bodyFormData.append("name", game.name);
-    bodyFormData.append("rating", game.rating);
-    bodyFormData.append("released", game.released);
-    bodyFormData.append("userEmail", email);
+    let gameData = {
+      background_image:game.background_image,
+      name:game.name,
+      rating:game.rating,
+      released:game.released,
+      gameId:game.id,
+      userEmail:email,
+    }
 
     const token = localStorage.getItem("token");
     const url = `http://localhost:5000/api/wishlist/add`;
     axios
-      .post(url, bodyFormData, {
+      .post(url, gameData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
