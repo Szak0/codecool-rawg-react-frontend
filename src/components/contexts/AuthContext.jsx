@@ -3,27 +3,20 @@ import React, { useEffect, useState, createContext } from "react";
 export const AuthContext = createContext();
 
 export const AuthProvider = (props) => {
-  const [userInfo, setUserInfo] = useState({
-    token: "",
-    roles: [],
-    userEmail: "",
-  });
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setUserInfo({
-          token: localStorage.getItem("token"),
-          roles: localStorage.getItem("roles"),
-          userEmail: localStorage.getItem("userEmail"),
-        });
+        localStorage.setItem("roles", user.roles);
+        localStorage.setItem("userEmail", user.userEmail);
       } catch (error) {}
     };
     fetchData();
-  }, []);
+  }, [user]);
 
   return (
-    <AuthContext.Provider value={[userInfo, setUserInfo]}>
+    <AuthContext.Provider value={[user, setUser]}>
       {props.children}
     </AuthContext.Provider>
   );
