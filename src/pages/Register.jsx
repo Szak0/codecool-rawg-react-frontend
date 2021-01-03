@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { FormControl, Input, InputLabel } from "@material-ui/core";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -12,10 +12,12 @@ const Register = () => {
   const [authServerDown, setAuthServerDown] = useState(false);
   const [PasswordNotMatch, setPasswordNotMatch] = useState(false);
   const history = useHistory();
-
+  
   const sendRequest = (password) => {
+    const method = `/register`
+    const baseURL = `${process.env.REACT_APP_BACKEND_AUTH}${method}`;
     axios
-      .post(`http://localhost:5000/auth/register`, {
+      .post(baseURL, {
         userName: userName,
         email: userEmail,
         password: password,
