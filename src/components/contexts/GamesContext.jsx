@@ -10,7 +10,7 @@ export const GamesProvider = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const firstPage = 1;
-  const pageSize = 12;
+  const pageSize = 14;
 
   const [filters, setFilters] = useState({
     page: firstPage,
@@ -28,7 +28,7 @@ export const GamesProvider = (props) => {
       setIsLoading(true);
       try {
         const client = axios.create({
-          baseURL: `https://api.rawg.io/api`,
+          baseURL: `${process.env.REACT_APP_BACKEND_GAMES}`,
           timeout: 20000,
         });
         const request = await client.get(
