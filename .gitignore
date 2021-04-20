@@ -7,11 +7,11 @@
 
 # testing
 /coverage
-
+debug.log
 # production
 /build
 /.vscode
-package-lock.json
+
 # misc
 .DS_Store
 .env.local
@@ -25,3 +25,4 @@ yarn-error.log*
 .idea/
 .env
 .eslintcache
+  
