@@ -12,7 +12,7 @@ import DrawerItem from "./DrawerItem";
 import { Link, useHistory } from "react-router-dom";
 import StarLogo from "../logos/StarLogo";
 import { AuthContext } from "../../contexts/AuthContext";
-
+import axios from "axios";
 import {
   today,
   nextWeekDate,
@@ -20,10 +20,14 @@ import {
   lastMonth,
   formatMonth,
 } from "../../date-time/DrawerTimeSetting";
+import LoginPic from "../logos/LoginPic";
+import LogOutPic from "../logos/LogOutPic";
+import Face from "../logos/Face";
+import RegisterLogo from "../logos/RegisterLogo";
 
 const DrawerContent = ({ setOpen }) => {
-  const [userInfo, setUserInfo] = useContext(AuthContext);
-
+  const [user, setUser] = useContext(AuthContext);
+  
   const history = useHistory();
 
   const routeChangeRegistration = () => {
@@ -208,18 +212,18 @@ const DrawerContent = ({ setOpen }) => {
         <ListItem>
           <ListItemText primary={"Account"} />
         </ListItem>
-
-        {localStorage.getItem("token") ? (
+        { user ? (
           <div>
-            <DrawerItem text={"My Profile"} onclick={routeChangeMyProfile} />
-            <DrawerItem text={"Log out"} onclick={handleLogOut} />
+            <DrawerItem text={"My Profile"} onclick={handleProfile} component={<Face/>} />
+            <DrawerItem text={"Log out"} onclick={handleLogOut} component={<LogOutPic/>}/>
           </div>
         ) : (
           <div>
-            <DrawerItem text={"Login"} onclick={routeChangeLogin} />
+            <DrawerItem text={"Login"} onclick={routeChangeLogin} component={<LoginPic/>}/>
             <DrawerItem
               text={"Registration"}
               onclick={routeChangeRegistration}
+              component={<RegisterLogo/>}
             />
           </div>
         )}
