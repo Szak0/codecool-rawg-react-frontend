@@ -1,6 +1,5 @@
 import React, { useRef, useState, useContext } from "react";
-import StarRatings from "react-star-ratings";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Platforms from "../UI/platform-icons/Platforms";
 import NoImageUrl from "../../static/noImagePlaceholder/no_image_to_show_.webp";
 import axios from "axios";
@@ -11,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import { AuthContext } from "../contexts/AuthContext";
 
 const GameItem = ({ game }) => {
-  const [userInfo] = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   const [videInfo, seVideoInfo] = useState({
     vidRef: useRef(null),
@@ -25,16 +24,12 @@ const GameItem = ({ game }) => {
       rating:game.rating,
       released:game.released,
       gameId:game.id,
-      userEmail:email,
+      userEmail: email,
     }
-
-    const token = localStorage.getItem("token");
-    const url = `http://localhost:5000/api/wishlist/add`;
+    const url = `${process.env.REACT_APP_BACKEND_USER}/wishlist/add`;
     axios
       .post(url, gameData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        withCredentials: true,
       })
       .catch((err) => {
         if (err.response) {
@@ -70,23 +65,6 @@ const GameItem = ({ game }) => {
               src={cropImage(game.background_image)}
               alt={game.name}
             />
-
-            {/*
-            <button onClick={() => handlePlayVideo} className={"play-button"}>
-              PLAY
-            </button>
-             <video
-              onClick={(e) => e.target.pause()}
-              ref={videInfo.vidRef}
-              controlsList="nodownload"
-              muted
-              type="video/mp4"
-              width="100%"
-              height="100%"
-            >
-              <source src={game.clip.clip} type="video/mp4"></source>
-              <source src="Video.ogg" type="video/ogg"></source>
-            </video> */}
           </div>
         ) : (
           <div>
@@ -112,14 +90,13 @@ const GameItem = ({ game }) => {
         <span>{game.released}</span>
         <Platforms platforms={game.platforms} />
         <div className={"rating-container"}>
-          {userInfo.userEmail == "undefined" ||
-          userInfo.userEmail == null ? null : (
+          { user ? (
             <div style={{ float: "right" }}>
               <Button onClick={async (e) => handleWish(e)} color="secondary">
                 Add to wishes
               </Button>
             </div>
-          )}
+          ) : (null) }
 
           {/* <button onClick={async (e) => handleWish(e)}>Favorite</button> */}
 

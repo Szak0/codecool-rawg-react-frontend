@@ -1,25 +1,20 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import GamesList from "../components/game-cards/GamesList";
 import WishListContainer from "../components/wishlist/WishListContainer";
+
 
 const ProfilePage = () => {
   const [data, setData] = useState([]);
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const token = localStorage.getItem("token");
-
+  
   useEffect(() => {
     const fetchData = async () => {
-      const request = await axios.get(`http://localhost:5000/api/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const request = await axios.get(`${process.env.REACT_APP_BACKEND_USER}/me`, {
+        withCredentials: true,
       });
       setData(request.data);
-      console.log(request.data);
-      console.log(data);
     };
     fetchData();
   }, []);
@@ -27,12 +22,9 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const request = await axios.get(`http://localhost:5000/api/wishlist`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const request = await axios.get(`${process.env.REACT_APP_BACKEND_USER}/wishlist`, {
+          withCredentials: true,
         });
-
         if (request.data) {
           setGames((game) => [...game, ...request.data]);
         } else {
@@ -73,7 +65,7 @@ const ProfilePage = () => {
             <WishListContainer games={games} />{" "}
           </div>
         ) : (
-          <div>Add some game to your wishlist!</div>
+          <h1>Add some game to your wishlist!</h1>
         )}
       </div>
     </div>

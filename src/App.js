@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GameDetails from "./components/game-detail/GameDetails";
 import NavBar from "./components/UI/header-nav/NavBar";
@@ -22,6 +22,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/ProfilePage";
 import { AuthProvider } from "./components/contexts/AuthContext";
+
+
 
 function App() {
   const classes = useStyles();
