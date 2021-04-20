@@ -15,7 +15,8 @@
 }
 .bold-drawer-item {
   text-decoration: none;
-  color: yellow;
+  color: rgb(255, 0, 0);
+  font-weight: bold;
 }
 .normalize-link {
   text-decoration: none;
