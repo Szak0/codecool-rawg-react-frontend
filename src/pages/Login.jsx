@@ -1,26 +1,26 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   FormControl,
   Input,
-  FormHelperText,
   InputLabel,
 } from "@material-ui/core";
 import { AuthContext } from "../components/contexts/AuthContext";
+
 
 const Login = () => {
   const history = useHistory();
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [userInfo, setUserInfo] = useContext(AuthContext);
+  const [user, setUser] = useContext(AuthContext);
   const [error, setError] = useState(false);
   const [authServerDown, setAuthServerDown] = useState(false);
 
-  const handlePost = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-
-    const baseURL = `http://localhost:5000/auth/login`;
+    const method = `/login`
+    const baseURL = `${process.env.REACT_APP_BACKEND_AUTH}${method}`;
     axios
       .post(
         baseURL,
@@ -28,18 +28,18 @@ const Login = () => {
           email: userEmail,
           password: userPassword,
         },
-        { headers: {} }
+        {withCredentials: true}
       )
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("roles", res.data.roles);
-        localStorage.setItem("userEmail", res.data.userEmail);
-        let path = `/`;
-        history.push(path);
-        window.location.reload();
-        console.log(res);
+        setUser({
+          roles: res.data.roles,
+          userEmail: res.data.userEmail,
+          userName: res.data.userName
+        });
+        console.log(user);
+        history.push("/profile")
       })
-      .catch((err) => {
+      .catch((err) => { 
         if (err.response) {
           setError(true);
         } else if (err.request) {
@@ -61,10 +61,6 @@ const Login = () => {
     setUserEmail(e.target.value);
   };
 
-  //   const handleUserName = (e) => {
-  //     setUserName(e.target.value);
-  //   };
-
   const handlePassword = (e) => {
     setUserPassword(e.target.value);
   };
@@ -81,14 +77,6 @@ const Login = () => {
               onChange={handleEmail}
             />
           </FormControl>
-          {/* <FormControl>
-          <InputLabel htmlFor="my-input">User name</InputLabel>
-          <Input
-            id="user-name"
-            aria-describedby="my-helper-text"
-            onChange={handleUserName}
-          />
-        </FormControl> */}
         </div>
         <div className={"forms"}>
           <FormControl>
@@ -105,7 +93,7 @@ const Login = () => {
           <Input
             type="submit"
             value="submit"
-            onClick={handlePost}
+            onClick={handleLogin}
             disabled={!validateForm()}
           />
         </div>

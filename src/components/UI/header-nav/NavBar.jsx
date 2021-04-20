@@ -10,11 +10,6 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import SearchIcon from "@material-ui/icons/Search";
 import { Navbar } from "react-bootstrap";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchBar from "../filters/search-bar/SearchBar";
 import { GamesContext } from "../../contexts/GamesContext";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -37,7 +32,7 @@ const NavBar = ({
     isError,
     setPathSuffix,
   ] = useContext(GamesContext);
-  const [userInfo, setUserInfo] = useContext(AuthContext);
+  const [user, setUser] = useContext(AuthContext);
   const menuId = "primary-search-account-menu";
 
   return (
@@ -77,10 +72,12 @@ const NavBar = ({
             style={{ marginLeft: "auto" }}
           >
             <IconButton>
-              <AccountCircle />
-              <div>
-                {userInfo.userEmail == "undefined" ? null : userInfo.userEmail}
-              </div>
+              {<div>
+                {user ? "Logged in as: " + user.userName : 
+                <Link to="/login" className={"normalize-link"}>
+                  <Navbar.Brand>Login</Navbar.Brand>
+                </Link>}
+              </div>}
             </IconButton>
           </div>
         </Toolbar>

@@ -14,6 +14,7 @@ const NewsAndTranding = () => {
     setPathSuffix,
   ] = useContext(GamesContext);
 
+  
   useEffect(() => {
     const handlePage = () => {
       setFilters({
