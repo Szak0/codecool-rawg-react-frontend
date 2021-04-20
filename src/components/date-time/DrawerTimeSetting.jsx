@@ -17,5 +17,5 @@ export const lastMonth = new Date(
 export const formatMonth = (month) => {
   if (month < 10) {
     return `0${month}`;
-  }
+  } else { return month }
 };

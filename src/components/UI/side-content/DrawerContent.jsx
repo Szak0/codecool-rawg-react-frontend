@@ -12,7 +12,7 @@ import DrawerItem from "./DrawerItem";
 import { Link, useHistory } from "react-router-dom";
 import StarLogo from "../logos/StarLogo";
 import { AuthContext } from "../../contexts/AuthContext";
-
+import axios from "axios";
 import {
   today,
   nextWeekDate,
@@ -20,25 +20,26 @@ import {
   lastMonth,
   formatMonth,
 } from "../../date-time/DrawerTimeSetting";
+import LoginPic from "../logos/LoginPic";
+import LogOutPic from "../logos/LogOutPic";
+import Face from "../logos/Face";
+import RegisterLogo from "../logos/RegisterLogo";
 
 const DrawerContent = ({ setOpen }) => {
-  const [userInfo, setUserInfo] = useContext(AuthContext);
-
+  const [user, setUser] = useContext(AuthContext);
+  
   const history = useHistory();
 
   const routeChangeRegistration = () => {
-    let path = `/register`;
-    history.push(path);
+    history.push(`/register`);
   };
 
   const routeChangeLogin = () => {
-    let path = `/login`;
-    history.push(path);
+    history.push(`/login`);
   };
 
-  const routeChangeMyProfile = () => {
-    let path = `/profile`;
-    history.push(path);
+  const handleProfile = () => {
+    history.push(`/profile`);
   };
 
   const [
@@ -52,13 +53,32 @@ const DrawerContent = ({ setOpen }) => {
     setPathSuffix,
   ] = useContext(GamesContext);
 
-  const handleLogOut = () => {
-    localStorage.clear();
-    setUserInfo(null);
-    let path = `/`;
-    history.push(path);
-    window.location.reload();
+
+  const handleLogOut = async (event) => {
+    event.preventDefault();
+    const baseURL = `${process.env.REACT_APP_BACKEND_AUTH}/logout`;
+    axios
+      .get(
+        baseURL,
+        {withCredentials: true},
+      )
+      .then((res) => {
+        localStorage.clear();
+        setUser(null)
+        history.push(`/login`);
+      })
+      .catch((err) => { 
+        if (err.response) {
+          //setError(true);
+        } else if (err.request) {
+          //setAuthServerDown(true);
+        } else {
+          // anything else
+        }
+      });
   };
+
+
 
   const handleAllTimeTop = () => {
     setFilters({
@@ -66,9 +86,7 @@ const DrawerContent = ({ setOpen }) => {
       ordering: "-rating",
       dates: `1920-01-01,${today.getFullYear()}-12-31`,
     });
-    setPathSuffix("/games?");
-    setGames([]);
-    setOpen(false);
+    normalizeFilter(setPathSuffix, setGames, setOpen);
   };
   const handlePopularLastYear = () => {
     setFilters({
@@ -76,9 +94,7 @@ const DrawerContent = ({ setOpen }) => {
       ordering: "-rating",
       dates: `${today.getFullYear() - 1}-01-01,${today.getFullYear()}-01-01`,
     });
-    setPathSuffix("/games?");
-    setGames([]);
-    setOpen(false);
+    normalizeFilter(setPathSuffix, setGames, setOpen);
   };
   const handleBestOfTheYear = () => {
     setFilters({
@@ -86,67 +102,55 @@ const DrawerContent = ({ setOpen }) => {
       ordering: "-rating",
       dates: `${today.getFullYear()}-01-01,${today.getFullYear()}-12-31`,
     });
-    setPathSuffix("/games?");
-    setGames([]);
-    setOpen(false);
+    normalizeFilter(setPathSuffix, setGames, setOpen);
   };
   const handleNextWeek = () => {
-    setFilters({
+    const settings = {
       page: 1,
       ordering: "-added",
-      dates: `${nextWeekDate.getFullYear()}-${
+      dates: `${nextWeekDate.getFullYear()}-${formatMonth(
         nextWeekDate.getMonth() + 1
-      }-${nextWeekDate.getDate()},${afterNextWeek.getFullYear()}-${
+      )}-${formatMonth(nextWeekDate.getDate())},${afterNextWeek.getFullYear()}-${formatMonth(
         afterNextWeek.getMonth() + 1
-      }-${afterNextWeek.getDate()}`,
-    });
-    console.log(
-      `${nextWeekDate.getFullYear()}-${
-        nextWeekDate.getMonth() + 1
-      }-${nextWeekDate.getDate()},${afterNextWeek.getFullYear()}-${
-        afterNextWeek.getMonth() + 1
-      }-${afterNextWeek.getDate()}`
-    );
-    setPathSuffix("/games?");
-    setGames([]);
-    setOpen(false);
+      )}-${formatMonth(afterNextWeek.getDate())}`,
+    }
+    setFilters(settings);
+    normalizeFilter(setPathSuffix, setGames, setOpen);
   };
   const handleThisWeek = () => {
-    setFilters({
+    const settings = {
       page: 1,
       ordering: "-added",
-      dates: `${today.getFullYear()}-${
+      dates: `${today.getFullYear()}-${formatMonth(
         today.getMonth() + 1
-      }-${today.getDate()},${nextWeekDate.getFullYear()}-${
+      )}-${formatMonth(today.getDate())},${nextWeekDate.getFullYear()}-${formatMonth(
         nextWeekDate.getMonth() + 1
-      }-${nextWeekDate.getDate()}`,
-    });
-    setPathSuffix("/games?");
-    setGames([]);
-    setOpen(false);
+      )}-${formatMonth(nextWeekDate.getDate())}`,
+    }
+    setFilters(settings);
+    normalizeFilter(setPathSuffix, setGames, setOpen);
   };
   const handleLast30Days = () => {
-    setFilters({
+    const settings = {
       page: 1,
       ordering: "-added",
       dates: `${lastMonth.getFullYear()}-${formatMonth(
         lastMonth.getMonth() + 1
-      )}-${lastMonth.getDate()},${today.getFullYear()}-${
+      )}-${formatMonth(lastMonth.getDate())},${today.getFullYear()}-${formatMonth(
         today.getMonth() + 1
-      }-${today.getDate()}`,
-    });
-    setPathSuffix("/games?");
-    setGames([]);
-    setOpen(false);
+      )}-${formatMonth(today.getDate())}`,
+    }
+    console.log(settings)
+    setFilters(settings);
+    normalizeFilter(setPathSuffix, setGames, setOpen);
+
   };
   const handleAll = () => {
     setFilters({
       page: 1,
       ordering: "-added",
     });
-    setPathSuffix("/games?");
-    setGames([]);
-    setOpen(false);
+    normalizeFilter(setPathSuffix, setGames, setOpen);
   };
 
   return (
@@ -208,18 +212,18 @@ const DrawerContent = ({ setOpen }) => {
         <ListItem>
           <ListItemText primary={"Account"} />
         </ListItem>
-
-        {localStorage.getItem("token") ? (
+        { user ? (
           <div>
-            <DrawerItem text={"My Profile"} onclick={routeChangeMyProfile} />
-            <DrawerItem text={"Log out"} onclick={handleLogOut} />
+            <DrawerItem text={"My Profile"} onclick={handleProfile} component={<Face/>} />
+            <DrawerItem text={"Log out"} onclick={handleLogOut} component={<LogOutPic/>}/>
           </div>
         ) : (
           <div>
-            <DrawerItem text={"Login"} onclick={routeChangeLogin} />
+            <DrawerItem text={"Login"} onclick={routeChangeLogin} component={<LoginPic/>}/>
             <DrawerItem
               text={"Registration"}
               onclick={routeChangeRegistration}
+              component={<RegisterLogo/>}
             />
           </div>
         )}
@@ -229,3 +233,11 @@ const DrawerContent = ({ setOpen }) => {
 };
 
 export default DrawerContent;
+
+
+function normalizeFilter(setPathSuffix, setGames, setOpen) {
+  setPathSuffix("/games?");
+  setGames([]);
+  setOpen(false);
+}
+
