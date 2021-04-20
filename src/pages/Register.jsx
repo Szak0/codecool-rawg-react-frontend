@@ -43,7 +43,6 @@ const Register = () => {
 
   const handlePost = (event) => {
     event.preventDefault();
-    //sendRequest(userPassword);
     if (validateForm()) {
       sendRequest(userPassword);
     }
@@ -68,7 +67,6 @@ const Register = () => {
 
   function validateMatchingPasswords() {
     return userPassword == passwordConfirmation;
-    // return userPassword.match(passwordConfirmation);
   }
   const handleEmail = (e) => {
     setError(false);
